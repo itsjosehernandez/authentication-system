@@ -7,8 +7,7 @@ db = SQLAlchemy()  # <----- appname
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dbname'
 
 
-
-#create DB models
+# create DB models
 
 class User(db.Model):
     # __tablename__ = 'USER'
@@ -26,45 +25,39 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+
+
 class product(db.Model):
-    # __tablename__ = 'Product'   
+    # __tablename__ = 'Product'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200),unique=True, nullable=False)
+    name = db.Column(db.String(200), unique=True, nullable=False)
     # date_created = db/Column(db.DateTime, default=datetime.utcnow)  <--- saving the date of creation in the DDBB
-    price = db.Column(db.Integer,unique=True , nullable=False)
-    product_img = db.Column(db.String(200),unique=True ,nullable=False)
+    price = db.Column(db.Integer, unique=True, nullable=False)
+    product_img = db.Column(db.String(200), unique=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
-    #user = db.relationship("user",backref=backref("user",uselist=False))
-    status = db.Column(db.String(200),unique=True,nullable=False)
-
-    
-
+    # user = db.relationship("user",backref=backref("user",uselist=False))
+    status = db.Column(db.String(200), unique=True, nullable=False)
 
     # create a funcition  to return a string when we add something
+
     def __repr__(self):
         return '<Name %r>' % self.id
 
 
-
-class transaccion(db.model):
-    id = db.column(db.Integer,primary_key=True)
+class transaccion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey(product.id))
     # product = db.relationship("product",backref=backref("product",uselist=False))
     product_img = db.Column(db.Integer, db.ForeignKey(product.product_img))
     # img = db.relationship("product",backref=backref("product",uselist=False))
     product_price = db.Column(db.Integer, db.ForeignKey(product.price))
     # price = db.relationship("product",backref=backref("product",uselist=False))
-    user_pay = db.Column(db.String(200),db.ForeignKey(user.pay))
+    user_pay = db.Column(db.String(200), db.ForeignKey(User.pay))
     # pay = db.relationship("user",backref=backref("user",uselist=False))
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
-    #user = db.relationship("user",backref=backref("user",uselist=False))
-    transaccion_status = db.Column(db.String(200),unique=True,nullable=False)
+    # user = db.relationship("user",backref=backref("user",uselist=False))
+    transaccion_status = db.Column(db.String(200), unique=True, nullable=False)
 
-     # create a funcition  to return a string when we add something
+    # create a funcition  to return a string when we add something
     def __repr__(self):
         return '<Name %r>' % self.id
-
-
-
-
-
