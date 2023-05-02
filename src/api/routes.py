@@ -21,15 +21,17 @@ def handle_hello():
 @api.route('/registro', methods=['POST'])
 def registro():
     body = request.json
+
     id = body.get('id', None)
     email = body.get('email', None)
     password = body.get('password', None) 
+    pay = body.get('pay',None)
     if email is None or password is None:
         return{"error": "todos los datos requeridos"}, 400
 
     encripted_password = generate_password_hash(password)
     
-    new_user = User(id=id, email=email, password=encripted_password, is_active=True)
+    new_user = User(id=id, email=email, password=encripted_password,pay=pay, is_active=True)
     db.session.add(new_user)
     try:
         db.session.commit()
