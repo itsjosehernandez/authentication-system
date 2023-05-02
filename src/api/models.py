@@ -28,15 +28,15 @@ class User(db.Model):
         }
 
 
-class product(db.Model):
+class Product(db.Model):
     # __tablename__ = 'Product'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), unique=True, nullable=False)
     # date_created = db/Column(db.DateTime, default=datetime.utcnow)  <--- saving the date of creation in the DDBB
     price = db.Column(db.Integer, unique=True, nullable=False)
     product_img = db.Column(db.String(200), unique=True, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey(User.id))
-    # user = db.relationship("user",backref=backref("user",uselist=False))
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user = db.relationship(User)
     status = db.Column(db.String(200), unique=True, nullable=False)
 
     # create a funcition  to return a string when we add something
@@ -45,18 +45,12 @@ class product(db.Model):
         return '<Name %r>' % self.id
 
 
-class transaccion(db.Model):
+class Transaccion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.Integer, db.ForeignKey(product.id))
-    # product = db.relationship("product",backref=backref("product",uselist=False))
-    product_img = db.Column(db.Integer, db.ForeignKey(product.product_img))
-    # img = db.relationship("product",backref=backref("product",uselist=False))
-    product_price = db.Column(db.Integer, db.ForeignKey(product.price))
-    # price = db.relationship("product",backref=backref("product",uselist=False))
-    user_pay = db.Column(db.String(200), db.ForeignKey(User.pay))
-    # pay = db.relationship("user",backref=backref("user",uselist=False))
-    user_id = db.Column(db.Integer, db.ForeignKey(User.id))
-    # user = db.relationship("user",backref=backref("user",uselist=False))
+    product_id = db.Column(db.Integer, db.ForeignKey("product.id"))
+    product = db.relationship(Product)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user = db.relationship(User)
     transaccion_status = db.Column(db.String(200), unique=True, nullable=False)
 
     # create a funcition  to return a string when we add something
