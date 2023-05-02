@@ -1,19 +1,86 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logoNavBar from "../../img/gaming-company-seeklogo.png";
 
 export const Navbar = () => {
-	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
-	);
+    return (
+        <nav className="navbar navbar-expand-lg  bg-dark" >
+            <div className="container-fluid ">
+                <a className="navbar-brand" href="#">
+                    <img src={logoNavBar} alt="Bootstrap" width="55" height="55"></img>
+                </a>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                </button>
+                <div className="collapse navbar-collapse d-flex " id="navbarSupportedContent">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
+                        <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="#">Boton1</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Boton2</a>
+                        </li>
+
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Boton3</a>
+                        </li>
+
+
+                    </ul>
+
+                    <form className="d-flex justify-content-center" role="search">
+                        <input className="form-control me-1" type="search" placeholder="Buscar..." aria-label="Search" />
+                        <button className="btn btn-outline-light me-3 " type="submit">Buscar</button>
+                    </form>
+                    <span class="navbar-text ">
+
+
+
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Deals</a>
+                            </li>
+
+
+                            <li class="nav-item dropdown">
+                                <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" href="#" role="button">
+                                    Login <i class="fa-regular fa-user"></i>
+                                </a>
+                                <ul class="dropdown-menu  dropdown-menu-end dropdown-menu-lg-start">
+                                    <li><a class="dropdown-item" href="#">Login</a></li>
+                                    <li><a class="dropdown-item" href="#">Register</a></li>
+                                </ul>
+                            </li>
+
+
+
+                            <li className="nav-item ">
+                                <a className="nav-link active" aria-current="page" >   </a>
+                            </li>
+
+                        </ul>
+
+
+                    </span >
+
+
+                    <button className="btn btn-primary gap-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-bars"></i></button>
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+        </nav>
+
+
+    );
 };
+
+
+
+
