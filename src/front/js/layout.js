@@ -7,7 +7,6 @@ import { Register } from "./pages/register";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
-
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Home } from "./pages/home";

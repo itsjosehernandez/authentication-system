@@ -31,7 +31,7 @@ export const Navbar = () => {
                         <input className="form-control me-1" type="search" placeholder="Buscar..." aria-label="Search" />
                         <button className="btn btn-outline-light me-3 " type="submit">Buscar</button>
                     </form>
-                    <span class="navbar-text ">
+                    <span className="navbar-text ">
 
 
 
@@ -42,13 +42,13 @@ export const Navbar = () => {
                             </li>
 
 
-                            <li class="nav-item dropdown">
-                                <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" href="#" role="button">
-                                    Login <i class="fa-regular fa-user"></i>
+                            <li className="nav-item dropdown">
+                                <a className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" href="#" role="button">
+                                    Login <i className="fa-regular fa-user"></i>
                                 </a>
-                                <ul class="dropdown-menu  dropdown-menu-end dropdown-menu-lg-start">
-                                    <li><a class="dropdown-item" href="#">Login</a></li>
-                                    <li><a class="dropdown-item" href="#">Register</a></li>
+                                <ul className="dropdown-menu  dropdown-menu-end dropdown-menu-lg-start">
+                                    <li><a className="dropdown-item" href="#">Login</a></li>
+                                    <li><a className="dropdown-item" href="#">Register</a></li>
                                 </ul>
                             </li>
 
@@ -64,7 +64,7 @@ export const Navbar = () => {
                     </span >
 
 
-                    <button className="btn btn-primary gap-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-bars"></i></button>
+                    <button className="btn btn-primary gap-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i className="fa-solid fa-bars"></i></button>
 
 
 
