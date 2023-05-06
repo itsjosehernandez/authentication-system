@@ -21,17 +21,16 @@ def handle_hello():
 @api.route('/registro', methods=['POST'])
 def registro():
     body = request.json
-
-    id = body.get('id', None)
+    
     email = body.get('email', None)
     password = body.get('password', None) 
     pay = body.get('pay',None)
-    if email is None or password is None:
+    if email is None or password is None or pay is None :
         return{"error": "todos los datos requeridos"}, 400
 
     encripted_password = generate_password_hash(password)
     
-    new_user = User(id=id, email=email, password=encripted_password,pay=pay, is_active=True)
+    new_user = User(email=email, password=encripted_password,pay=pay )
     db.session.add(new_user)
     try:
         db.session.commit()
@@ -61,6 +60,29 @@ def login():
         return {"msg":"Contraseña correta"},430
     else:
         return {"msg":"Contraseña incorreta"}, 415
+
+#PRODUCTO POST
+@api.route("/Product", methods=["POST"])
+def product():
+    body = request.json
+    name = body.get("name", None)
+    price = body.get ("price", None)
+    #product_img = body.get ("img", None)
+    status = body.get ("status", None)
+
+    if name is None or price is None or status is None:
+        return{"error": "todos los datos requeridos"}, 460
+
+    new_product = product( name=name, price=price, status=status)
+    db.session.add(new_product)
+    try:
+        db.session.commit()
+        return {"msg":"producto añadido con exito"}
+    except Exception as error:
+        db.session.rollback()
+        return jsonify({"error": error}), 470
+
+
 
 
 
