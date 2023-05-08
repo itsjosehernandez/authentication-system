@@ -2,9 +2,11 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate()
     const [userInfo, setUSerInfo] = useState({
         "email": "",
         "password": "",
@@ -16,7 +18,15 @@ export const Register = () => {
     const handleChange = (event) => {
         setUSerInfo({ ...userInfo, [event.target.name]: event.target.value })
     }
-
+    function registro (event) {
+        event.preventDefault()
+        actions.handleRegister(userInfo.email, userInfo.password, userInfo.pay)
+    }
+    function ingresar (event) {
+        event.preventDefault()
+        const response = actions.handleLogin(userInfo.email, userInfo.password,)
+        if (response)navigate("/pages/home")
+        }
     return (
         <div className="card m-5 text-bg-light">
             <div className="card-body py-5 ">
@@ -51,20 +61,20 @@ export const Register = () => {
                                                 <form>
                                                     <div className="mb-3 ">
                                                         <label htmlFor=" validationCustom01" className="form-label">Correo Electronico:</label>
-                                                        <input name="email_login" type="email" className="form-control" id="validationCustom01" aria-describedby="emailHelp" required />
+                                                        <input name="email" type="email" value={userInfo.email} onChange={(event) => { handleChange(event)}} className="form-control" id="validationCustom01" aria-describedby="emailHelp" required />
                                                         <div className="valid-feedback">Looks good! </div>
                                                         <div id="emailHelp" className="form-text">Nunca compartiremos su correo electrónico con nadie más.</div>
                                                     </div>
                                                     <div className="mb-3">
                                                         <label htmlFor="exampleInputPassword1 validationCustom01" className="form-label">Contraseña</label>
-                                                        <input name="password_login" type="password" className="form-control" id="validationCustom01" required />
+                                                        <input name="password" type="password" value={userInfo.password} onChange={(event) => { handleChange(event) }} className="form-control" id="validationCustom01" required />
                                                     </div>
 
                                                     <div className="mb-3 form-check">
                                                         <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                                                         <label className="form-check-label" htmlFor="exampleCheck1">Mantener mi sesion iniciada</label>
                                                     </div>
-                                                    <button type="submit" className="btn btn-primary">Ingresar</button>
+                                                    <button type="submit" onClick={(event) => { ingresar(event) }} className="btn btn-primary">Ingresar</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -118,7 +128,7 @@ export const Register = () => {
                                                 <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                                                 <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
                                             </div>
-                                            <button id="registro" onClick={(event) => { actions.handleRegister(userInfo.email, userInfo.password, userInfo.pay, event) }} className="btn btn-primary">Submit</button>
+                                            <button id="registro" onClick={(event) => { registro(event) }} className="btn btn-primary">Submit</button>
                                         </form>
                                     </div>
                                 </div>

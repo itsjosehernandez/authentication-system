@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: c0e7aa3d3eeb
+Revision ID: baa75eadfe5f
 Revises: 
-Create Date: 2023-05-05 02:40:19.136062
+Create Date: 2023-05-08 02:44:51.094221
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c0e7aa3d3eeb'
+revision = 'baa75eadfe5f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,7 +23,6 @@ def upgrade():
     sa.Column('email', sa.String(length=120), nullable=False),
     sa.Column('password', sa.String(length=200), nullable=False),
     sa.Column('pay', sa.String(length=150), nullable=False),
-    sa.Column('is_active', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('pay')
@@ -32,14 +31,12 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=200), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
-    sa.Column('product_img', sa.String(length=200), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('status', sa.String(length=200), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name'),
     sa.UniqueConstraint('price'),
-    sa.UniqueConstraint('product_img'),
     sa.UniqueConstraint('status')
     )
     op.create_table('transaccion',

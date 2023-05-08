@@ -7,6 +7,8 @@ import ProductGrid from  "../component/productGrid.jsx"
 
 export const Home = () => {
     const { store, actions } = useContext(Context);
+    console.log(store.token)
+    
 
     return (
         <div className="text-center mt-5 d-flex" >
