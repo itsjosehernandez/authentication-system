@@ -18,18 +18,18 @@ export const Register = () => {
     const handleChange = (event) => {
         setUSerInfo({ ...userInfo, [event.target.name]: event.target.value })
     }
-    function registro (event) {
+    function registro(event) {
         event.preventDefault()
         actions.handleRegister(userInfo.email, userInfo.password, userInfo.pay)
     }
-    function ingresar (event) {
+    function ingresar(event) {
         event.preventDefault()
         const response = actions.handleLogin(userInfo.email, userInfo.password,)
-        if (response)navigate("/pages/home")
-        }
+        if (response) navigate("/pages/home")
+    }
     return (
 
-        <div classNameName="container py-5">
+        <div className="container py-5">
 
 
             <div className="card d-flex justify-content-center ">
@@ -50,7 +50,7 @@ export const Register = () => {
 
 
 
-                        <div className="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                        <div className="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabIndex="0">
 
                             <div className="card m-5 text-bg-light">
                                 <div className="card-body py-5">
@@ -60,24 +60,26 @@ export const Register = () => {
 
 
 
-                                        <div classNameName="container d-flex justify-content-center mt-5 ">
+                                        <div className="container d-flex justify-content-center mt-5 ">
                                             <form>
                                                 <div className="mb-3 ">
-                                                    <label for=" validationCustom01" className="form-label">Correo Electronico:</label>
-                                                    <input name="email" value={userInfo.email} onChange={(event) => {handleChange(event)}} type="email" className="form-control" id="validationCustom01" aria-describedby="emailHelp" required />
+                                                    <label htmlFor=" validationCustom01" className="form-label">Correo Electronico:</label>
+                                                    <input name="email" value={userInfo.email} onChange={(event) => { handleChange(event) }} type="email" className="form-control" id="validationCustom01" aria-describedby="emailHelp" required />
                                                     <div className="valid-feedback">Looks good! </div>
                                                     <div id="emailHelp" className="form-text">Nunca compartiremos su correo electrónico con nadie más.</div>
                                                 </div>
                                                 <div className="mb-3">
-                                                    <label for="exampleInputPassword1 validationCustom01" className="form-label">Contraseña</label>
-                                                    <input  name="password" value={userInfo.password} onChange={(event) => {handleChange(event)}} type="password" className="form-control" id="validationCustom01" required />
+                                                    <label htmlFor
+                                                        ="exampleInputPassword1 validationCustom01" className="form-label">Contraseña</label>
+                                                    <input name="password" value={userInfo.password} onChange={(event) => { handleChange(event) }} type="password" className="form-control" id="validationCustom01" required />
                                                 </div>
 
                                                 <div className="mb-3 form-check">
-                                                    <input  type="checkbox" className="form-check-input" id="exampleCheck1" />
-                                                    <label className="form-check-label" for="exampleCheck1">Mantener mi sesion iniciada</label>
+                                                    <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                                                    <label className="form-check-label" htmlFor
+                                                        ="exampleCheck1">Mantener mi sesion iniciada</label>
                                                 </div>
-                                                <button onClick={(event) => {ingresar(event)}} type="submit" className="btn btn-primary">Ingresar</button>
+                                                <button onClick={(event) => { ingresar(event) }} type="submit" className="btn btn-primary">Ingresar</button>
                                             </form>
                                         </div>
                                     </p>
@@ -104,7 +106,7 @@ export const Register = () => {
 
 
 
-                        <div className="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                        <div className="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabIndex="0">
 
                             <div className="card m-5 text-bg-light ">
 
@@ -118,25 +120,25 @@ export const Register = () => {
                                         <div className="container d-flex justify-content-center mt-5 ">
                                             <form>
                                                 <div className="mb-3 ">
-                                                    <label for=" validationCustom01" className="form-label">Correo electronico</label>
-                                                    <input  name="email" value={userInfo.email} onChange={(event) => {handleChange(event)}}  type="email" className="form-control" id="validationCustom01" aria-describedby="emailHelp" required />
+                                                    <label htmlFor=" validationCustom01" className="form-label">Correo electronico</label>
+                                                    <input name="email" value={userInfo.email} onChange={(event) => { handleChange(event) }} type="email" className="form-control" id="validationCustom01" aria-describedby="emailHelp" required />
                                                     <div className="valid-feedback">Looks good! </div>
                                                     <div id="emailHelp" className="form-text">Nunca compartiremos su correo electrónico con nadie más.</div>
                                                 </div>
                                                 <div className="mb-3">
-                                                    <label for="exampleInputPassword1 validationCustom01" className="form-label">Contraseña</label>
-                                                    <input name="password" value={userInfo.password} onChange={(event) => {handleChange(event)}} type="password" className="form-control" id="validationCustom01" required />
+                                                    <label htmlFor="exampleInputPassword1 validationCustom01" className="form-label">Contraseña</label>
+                                                    <input name="password" value={userInfo.password} onChange={(event) => { handleChange(event) }} type="password" className="form-control" id="validationCustom01" required />
                                                 </div>
 
                                                 <div className="mb-3">
-                                                    <label for="exampleInputEmail1 validationCustom01" className="form-label">Correo Paypal</label>
-                                                    <input  name="pay" value={userInfo.pay} onChange={(event) => {handleChange(event)}} type="email" className="form-control" id="exampleInputEmail1 validationCustom01" aria-describedby="emailHelp" required />
+                                                    <label htmlFor="exampleInputEmail1 validationCustom01" className="form-label">Correo Paypal</label>
+                                                    <input name="pay" value={userInfo.pay} onChange={(event) => { handleChange(event) }} type="email" className="form-control" id="exampleInputEmail1 validationCustom01" aria-describedby="emailHelp" required />
                                                 </div>
                                                 <div className="mb-3 form-check">
                                                     <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                                                    <label className="form-check-label" for="exampleCheck1">Check me out</label>
+                                                    <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
                                                 </div>
-                                                <button  onClick={(event) => {registro(event)}} type="submit" className="btn btn-primary">Submit</button>
+                                                <button onClick={(event) => { registro(event) }} type="submit" className="btn btn-primary">Submit</button>
                                             </form>
                                         </div>
                                     </p>
@@ -164,6 +166,6 @@ export const Register = () => {
 
 
 
-);
+    );
 };
 

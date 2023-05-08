@@ -43,7 +43,7 @@ export const Navbar = () => {
 
 
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Login <i class="fa-regular fa-user"></i></a>
+                                <a className="nav-link" href="#">Login <i className="fa-regular fa-user"></i></a>
                             </li>
 
 
