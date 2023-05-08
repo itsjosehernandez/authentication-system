@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logoNavBar from "../../img/gaming-company-seeklogo.png";
+import logoNavBar from "../../img/OP2.png";
 
 export const Navbar = () => {
     return (
@@ -31,7 +31,7 @@ export const Navbar = () => {
                         <input className="form-control me-1" type="search" placeholder="Buscar..." aria-label="Search" />
                         <button className="btn btn-outline-light me-3 " type="submit">Buscar</button>
                     </form>
-                    <span class="navbar-text ">
+                    <span className="navbar-text ">
 
 
 
@@ -60,7 +60,7 @@ export const Navbar = () => {
                     </span >
 
 
-                    <button className="btn btn-primary gap-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-bars"></i></button>
+                    <button className="btn btn-primary gap-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i className="fa-solid fa-bars"></i></button>
 
 
 

@@ -7,9 +7,9 @@ import { Register } from "./pages/register";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
-
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Home } from "./pages/home";
 
 
 
@@ -29,11 +29,11 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-                        <Route element={<Register />} path="/" />
+                        <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
-
+                        <Route element={<Home/>}path="/pages/home"/>
                     </Routes>
                     
                     <Footer />

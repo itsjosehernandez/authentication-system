@@ -1,62 +1,83 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate()
+    const [userInfo, setUSerInfo] = useState({
+        "email": "",
+        "password": "",
+        "pay": ""
+    })
 
+    // definimos una funcion para manejar los cambios en los valores de los inputs y definirlas en el estado
+    // [event.target.name] = email, password o pay
+    const handleChange = (event) => {
+        setUSerInfo({ ...userInfo, [event.target.name]: event.target.value })
+    }
+    function registro (event) {
+        event.preventDefault()
+        actions.handleRegister(userInfo.email, userInfo.password, userInfo.pay)
+    }
+    function ingresar (event) {
+        event.preventDefault()
+        const response = actions.handleLogin(userInfo.email, userInfo.password,)
+        if (response)navigate("/pages/home")
+        }
     return (
 
-        <div className="container py-5">
+        <div classNameName="container py-5">
 
 
-            <div class="card d-flex justify-content-center ">
-                <div class="card-body">
+            <div className="card d-flex justify-content-center ">
+                <div className="card-body">
 
-                    <ul class="nav nav-tabs  d-flex justify-content-center" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Iniciar Sesion</button>
+                    <ul className="nav nav-tabs  d-flex justify-content-center" id="myTab" role="tablist">
+                        <li className="nav-item" role="presentation">
+                            <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Iniciar Sesion</button>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Registrate</button>
+                        <li className="nav-item" role="presentation">
+                            <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Registrate</button>
                         </li>
 
                     </ul>
-                    <div class="tab-content" id="myTabContent">
+                    <div className="tab-content" id="myTabContent">
 
 
 
 
 
-                        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                        <div className="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
 
-                            <div class="card m-5 text-bg-light">
-                                <div class="card-body py-5">
-                                    <h5 class="card-title text-center">Iniciar Sesion</h5>
-                                    <p class="card-text">
-
-
+                            <div className="card m-5 text-bg-light">
+                                <div className="card-body py-5">
+                                    <h5 className="card-title text-center">Iniciar Sesion</h5>
+                                    <p className="card-text">
 
 
-                                        <div className="container d-flex justify-content-center mt-5 ">
+
+
+                                        <div classNameName="container d-flex justify-content-center mt-5 ">
                                             <form>
-                                                <div class="mb-3 ">
-                                                    <label for=" validationCustom01" class="form-label">Correo Electronico:</label>
-                                                    <input type="email" class="form-control" id="validationCustom01" aria-describedby="emailHelp" required />
-                                                    <div class="valid-feedback">Looks good! </div>
-                                                    <div id="emailHelp" class="form-text">Nunca compartiremos su correo electrónico con nadie más.</div>
+                                                <div className="mb-3 ">
+                                                    <label for=" validationCustom01" className="form-label">Correo Electronico:</label>
+                                                    <input name="email" value={userInfo.email} onChange={(event) => {handleChange(event)}} type="email" className="form-control" id="validationCustom01" aria-describedby="emailHelp" required />
+                                                    <div className="valid-feedback">Looks good! </div>
+                                                    <div id="emailHelp" className="form-text">Nunca compartiremos su correo electrónico con nadie más.</div>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="exampleInputPassword1 validationCustom01" class="form-label">Contraseña</label>
-                                                    <input type="password" class="form-control" id="validationCustom01" required />
+                                                <div className="mb-3">
+                                                    <label for="exampleInputPassword1 validationCustom01" className="form-label">Contraseña</label>
+                                                    <input  name="password" value={userInfo.password} onChange={(event) => {handleChange(event)}} type="password" className="form-control" id="validationCustom01" required />
                                                 </div>
 
-                                                <div class="mb-3 form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                                                    <label class="form-check-label" for="exampleCheck1">Mantener mi sesion iniciada</label>
+                                                <div className="mb-3 form-check">
+                                                    <input  type="checkbox" className="form-check-input" id="exampleCheck1" />
+                                                    <label className="form-check-label" for="exampleCheck1">Mantener mi sesion iniciada</label>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Ingresar</button>
+                                                <button onClick={(event) => {ingresar(event)}} type="submit" className="btn btn-primary">Ingresar</button>
                                             </form>
                                         </div>
                                     </p>
@@ -83,39 +104,39 @@ export const Register = () => {
 
 
 
-                        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                        <div className="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 
-                            <div class="card m-5 text-bg-light ">
+                            <div className="card m-5 text-bg-light ">
 
-                                <div class="card-body py-5 ">
-                                    <h5 class="card-title text-center">Registrate!</h5>
-                                    <p class="card-text">
+                                <div className="card-body py-5 ">
+                                    <h5 className="card-title text-center">Registrate!</h5>
+                                    <p className="card-text">
 
 
 
 
                                         <div className="container d-flex justify-content-center mt-5 ">
                                             <form>
-                                                <div class="mb-3 ">
-                                                    <label for=" validationCustom01" class="form-label">Correo electronico</label>
-                                                    <input type="email" class="form-control" id="validationCustom01" aria-describedby="emailHelp" required />
-                                                    <div class="valid-feedback">Looks good! </div>
-                                                    <div id="emailHelp" class="form-text">Nunca compartiremos su correo electrónico con nadie más.</div>
+                                                <div className="mb-3 ">
+                                                    <label for=" validationCustom01" className="form-label">Correo electronico</label>
+                                                    <input  name="email" value={userInfo.email} onChange={(event) => {handleChange(event)}}  type="email" className="form-control" id="validationCustom01" aria-describedby="emailHelp" required />
+                                                    <div className="valid-feedback">Looks good! </div>
+                                                    <div id="emailHelp" className="form-text">Nunca compartiremos su correo electrónico con nadie más.</div>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="exampleInputPassword1 validationCustom01" class="form-label">Contraseña</label>
-                                                    <input type="password" class="form-control" id="validationCustom01" required />
+                                                <div className="mb-3">
+                                                    <label for="exampleInputPassword1 validationCustom01" className="form-label">Contraseña</label>
+                                                    <input name="password" value={userInfo.password} onChange={(event) => {handleChange(event)}} type="password" className="form-control" id="validationCustom01" required />
                                                 </div>
 
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1 validationCustom01" class="form-label">Correo Paypal</label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail1 validationCustom01" aria-describedby="emailHelp" required />
+                                                <div className="mb-3">
+                                                    <label for="exampleInputEmail1 validationCustom01" className="form-label">Correo Paypal</label>
+                                                    <input  name="pay" value={userInfo.pay} onChange={(event) => {handleChange(event)}} type="email" className="form-control" id="exampleInputEmail1 validationCustom01" aria-describedby="emailHelp" required />
                                                 </div>
-                                                <div class="mb-3 form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                                <div className="mb-3 form-check">
+                                                    <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                                                    <label className="form-check-label" for="exampleCheck1">Check me out</label>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <button  onClick={(event) => {registro(event)}} type="submit" className="btn btn-primary">Submit</button>
                                             </form>
                                         </div>
                                     </p>

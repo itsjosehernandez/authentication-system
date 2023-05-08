@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 api = Blueprint('api', __name__)
 
@@ -21,17 +22,16 @@ def handle_hello():
 @api.route('/registro', methods=['POST'])
 def registro():
     body = request.json
-
-    id = body.get('id', None)
+    
     email = body.get('email', None)
     password = body.get('password', None) 
     pay = body.get('pay',None)
-    if email is None or password is None:
+    if email is None or password is None or pay is None :
         return{"error": "todos los datos requeridos"}, 400
 
     encripted_password = generate_password_hash(password)
     
-    new_user = User(id=id, email=email, password=encripted_password,pay=pay, is_active=True)
+    new_user = User(email=email, password=encripted_password,pay=pay )
     db.session.add(new_user)
     try:
         db.session.commit()
@@ -55,12 +55,37 @@ def login():
 
     if not is_user_registered:
         return {"error": "No existe Usuario con esas credenciales"}, 410
-
+    print(body)
     #validacion de contraseña
-    if check_password_hash(password, is_user_registered.password):
-        return {"msg":"Contraseña correta"},430
+    if check_password_hash(is_user_registered.password, password):      
+        token = create_access_token({"email": is_user_registered.email})     
+        print(token)
+        return jsonify({"access_token": token})
     else:
         return {"msg":"Contraseña incorreta"}, 415
+
+#PRODUCTO POST
+#product_img = body.get ("img", None)
+@api.route("/Product", methods=["POST"])
+def product():
+    body = request.json
+    name = body.get("name", None)
+    price = body.get ("price", None)
+    status = body.get ("status", None)
+
+    if name is None or price is None or status is None:
+        return{"error": "todos los datos requeridos"}, 460
+
+    new_product = product( name=name, price=price, status=status)
+    db.session.add(new_product)
+    try:
+        db.session.commit()
+        return {"msg":"producto añadido con exito"}
+    except Exception as error:
+        db.session.rollback()
+        return jsonify({"error": error}), 470
+
+
 
 
 
