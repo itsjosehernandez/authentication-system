@@ -42,15 +42,11 @@ export const Navbar = () => {
                             </li>
 
 
-                            <li className="nav-item dropdown">
-                                <a className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" href="#" role="button">
-                                    Login <i className="fa-regular fa-user"></i>
-                                </a>
-                                <ul className="dropdown-menu  dropdown-menu-end dropdown-menu-lg-start">
-                                    <li><a className="dropdown-item" href="#">Login</a></li>
-                                    <li><a className="dropdown-item" href="#">Register</a></li>
-                                </ul>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Login <i class="fa-regular fa-user"></i></a>
                             </li>
+
+
 
 
 
