@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 api = Blueprint('api', __name__)
 
@@ -54,20 +55,22 @@ def login():
 
     if not is_user_registered:
         return {"error": "No existe Usuario con esas credenciales"}, 410
-
+    print(body)
     #validacion de contraseña
-    if check_password_hash(password, is_user_registered.password):
-        return {"msg":"Contraseña correta"},430
+    if check_password_hash(is_user_registered.password, password):      
+        token = create_access_token({"email": is_user_registered.email})     
+        print(token)
+        return jsonify({"access_token": token})
     else:
         return {"msg":"Contraseña incorreta"}, 415
 
 #PRODUCTO POST
+#product_img = body.get ("img", None)
 @api.route("/Product", methods=["POST"])
 def product():
     body = request.json
     name = body.get("name", None)
     price = body.get ("price", None)
-    #product_img = body.get ("img", None)
     status = body.get ("status", None)
 
     if name is None or price is None or status is None:

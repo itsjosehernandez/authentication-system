@@ -26,14 +26,14 @@ class User(db.Model):
             # do not serialize the password, its a security breach
         }
 
-
+#product_img = db.Column(db.String(200), unique=True, nullable=False)
 class Product(db.Model):
     # __tablename__ = 'Product'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), unique=True, nullable=False)
     # date_created = db/Column(db.DateTime, default=datetime.utcnow)  <--- saving the date of creation in the DDBB
     price = db.Column(db.Integer, unique=True, nullable=False)
-    product_img = db.Column(db.String(200), unique=True, nullable=False)
+    
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     user = db.relationship(User)
     status = db.Column(db.String(200), unique=True, nullable=False)
