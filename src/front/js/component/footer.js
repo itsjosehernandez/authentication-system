@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import logoNavBar from "../../img/gaming-company-seeklogo.png";
 
 export const Footer = () => (
-<footer className="w-100 py-4 flex-shrink-0 bg-dark sticky-bottom">
+<footer className="w-100 py-4 flex-shrink-0 bg-dark ">
         <div className="container py-4">
             <div className="row gy-4 gx-5">
                 <div className="col-lg-4 col-md-6">
                     <h5 className="h1 text-white">
-						<a className="navbar-brand" href="#">
+						<a classNameName="navbar-brand" href="#">
         			 	<img src={logoNavBar} alt="Bootstrap" width="85" height="85"></img>
       					 </a></h5>
                     <p className="small text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
