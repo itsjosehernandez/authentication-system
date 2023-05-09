@@ -58,34 +58,44 @@ def login():
     print(body)
     #validacion de contraseña
     if check_password_hash(is_user_registered.password, password):      
-        token = create_access_token({"email": is_user_registered.email})     
+        token = create_access_token(identity = is_user_registered.id)     
         print(token)
         return jsonify({"access_token": token})
     else:
         return {"msg":"Contraseña incorreta"}, 415
 
 #PRODUCTO POST
-#product_img = body.get ("img", None)
-@api.route("/Product", methods=["POST"])
-def product():
+@api.route("/product", methods=["POST"])
+@jwt_required()
+def create_product():
     body = request.json
     name = body.get("name", None)
     price = body.get ("price", None)
+    product_img = body.get ("product_img", None)
     status = body.get ("status", None)
-
-    if name is None or price is None or status is None:
+    is_user_registered = get_jwt_identity()
+    user = User.query.get(is_user_registered)
+    if user is None:
+        return{"error": "no hemos encontrado su User_id"}
+    if name is None or price is None or product_img is None or status is None:
         return{"error": "todos los datos requeridos"}, 460
-
-    new_product = product( name=name, price=price, status=status)
+    new_product = Product(name=name, price=price, product_img=product_img, status=status)
+    print(new_product)
     db.session.add(new_product)
     try:
         db.session.commit()
-        return {"msg":"producto añadido con exito"}
+        return {"msg":"producto añadido con exito"}, 201
     except Exception as error:
         db.session.rollback()
-        return jsonify({"error": error}), 470
+        print(error)
+        return "error", 500
 
 
+#PRODUCTO GET
+@api.route("/product", methods=["GET"])
+def get_product():
+    Productos=Product.query.all()
+    return jsonify({"product":[product.serialize()for product in Productos]})
 
 #POST TRANSACCIONES
 @api.route("/transaccion", methods=["POST"])
@@ -121,7 +131,6 @@ def get_transaccion():
     transacciones=Transaccion.query.filter_by(user_id=user_id).all()
     return jsonify({"transacciones":[transaccion.serialize()for transaccion in transacciones]})
 
-    
     
 
 
