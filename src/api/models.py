@@ -66,5 +66,12 @@ class Transaccion(db.Model):
     # create a funcition  to return a string when we add something
     def __repr__(self):
         return '<Name %r>' % self.id
+  
+    def serialize(self):
+        return {
+            "product_id": self.product_id,
+            "user_id": self.user_id,
+            "transaccion_status": self.transaccion_status
+            # do not serialize the password, its a security breach
+        }
 
-    
