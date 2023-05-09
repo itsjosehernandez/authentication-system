@@ -1,7 +1,6 @@
 
 const getState = ({ getStore, getActions, setStore }) => {
-	var email = email
-	var password = password
+
 	return {
 		store: {
 			token: localStorage.getItem("token") || null,
@@ -20,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
-			handleRegister: async (email, password, pay ) => {
+			handleRegister: async (email, password, pay) => {
 				// Previene el refrescamiento predeterminado de los form
 				console.log(email, password, pay)
 				const response = await fetch(`${process.env.BACKEND_URL}/api/registro`, {
@@ -32,25 +31,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("Registro exitoso")
 			},
 
-			handleLogin: async ( email, password ) => {
+			handleLogin: async (email, password) => {
 				console.log(email, password)
-				const response = await fetch(`${process.env.BACKEND_URL}/api/login`,{
-					method:"POST",
-					body: JSON.stringify({ "email": email, "password": password}),
-					headers:{ "Content-Type":"application/json" }
+				const response = await fetch(`${process.env.BACKEND_URL}/api/login`, {
+					method: "POST",
+					body: JSON.stringify({ "email": email, "password": password }),
+					headers: { "Content-Type": "application/json" }
 				})
-				if(!response.ok) 
-				{alert("no pudo ingresar")
-				return false}
+				if (!response.ok) {
+					alert("no pudo ingresar")
+					localStorage.removeItem("token")
+					return false
+				}
 
-                const data = await response.json();
+				const data = await response.json();
 				const store = getStore();
-                setStore({ ...store, token: data.access_token });
-                JSON.stringify(localStorage.setItem("token", data.access_token));
-                return true;
-				
+				setStore({ ...store, token: data.access_token });
+				JSON.stringify(localStorage.setItem("token", data.access_token));
+				return true;
+
 			}
-			}
+		}
 	}
 };
 
