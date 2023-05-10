@@ -15,8 +15,10 @@ from flask_jwt_extended import JWTManager
 #from models import Person
 
 ENV = os.getenv("FLASK_ENV")
+DEBUG = os.getenv("FLASK_DEBUG")
 static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
+app.debug = True
 app.url_map.strict_slashes = False
 app.config["JWT_SECRET_KEY"] = os.environ.get("FLASK_APP_KEY")
 jwt = JWTManager(app)
@@ -51,7 +53,7 @@ def handle_invalid_usage(error):
 # generate sitemap with all your endpoints
 @app.route('/')
 def sitemap():
-    if ENV == "development":
+    if ENV == "development" or DEBUG == 1:
         return generate_sitemap(app)
     return send_from_directory(static_file_dir, 'index.html')
 
