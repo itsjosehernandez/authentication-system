@@ -4,6 +4,7 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 
+
 export const Register = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate()
@@ -22,12 +23,14 @@ export const Register = () => {
         event.preventDefault()
         actions.handleRegister(userInfo.email, userInfo.password, userInfo.pay)
     }
-    function ingresar(event) {
+    const ingresar = async (event) => {
         event.preventDefault()
         const response = actions.handleLogin(userInfo.email, userInfo.password,)
-        if (response) navigate("/pages/home")
+        console.log(response)
+        if (await response) navigate("/pages/home")
+
     }
-    return (
+    return (<>
 
         <div className="container py-5">
 
@@ -166,6 +169,7 @@ export const Register = () => {
 
 
 
+</>
     );
 };
 

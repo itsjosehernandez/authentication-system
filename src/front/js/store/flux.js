@@ -5,18 +5,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			token: localStorage.getItem("token") || null,
 			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			// creando store para almacenar productos
+			products:[]
 		},
 		actions: {
 			handleRegister: async (email, password, pay) => {
@@ -49,9 +39,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ ...store, token: data.access_token });
 				JSON.stringify(localStorage.setItem("token", data.access_token));
 				return true;
+			},
+			handleLogout: () => {
+				localStorage.removeItem("token")
+				setStore({ ...getStore().store, token: null });
+				return true
+			},
+			handleSearch: async (name) =>{
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/search`, {
+						method: "POST",
+						body: JSON.stringify({ "name": name }),
+						headers: { "Content-Type": "application/json" }
+					});
+					if (response.ok) {
+						const body = await response.json()
+						setStore({...getStore().store,products:body})
+					}else if (response.status == 404){
+						console.log("Producto no encontrado")
+					}
 
-			}
+				} catch (error) {
+					console.log(error)
+				}
+
+			} 
 		}
+
 	}
 };
 
