@@ -6,6 +6,11 @@ from api.models import db, User, Transaccion, Product
 from api.utils import generate_sitemap, APIException
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from sqlalchemy.sql.functions import ReturnTypeFromArgs
+import re
+
+class unaccent(ReturnTypeFromArgs):
+    pass
 
 api = Blueprint('api', __name__)
 
@@ -21,6 +26,7 @@ def handle_hello():
 # Registro de Usuario
 @api.route('/registro', methods=['POST'])
 def registro():
+    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     body = request.json
     
     email = body.get('email', None)
@@ -29,9 +35,15 @@ def registro():
     if email is None or password is None or pay is None :
         return{"error": "todos los datos requeridos"}, 400
 
+    if not re.match(email_pattern,email):
+        return jsonify({"error": "email no es valido"}), 400
+
+    if not re.match(email_pattern,pay):
+        return jsonify({"error": "pay no es valido"}), 400
+
     encripted_password = generate_password_hash(password)
     
-    new_user = User(email=email, password=encripted_password,pay=pay )
+    new_user = User(email=email, password=encripted_password, pay=pay)
     db.session.add(new_user)
     try:
         db.session.commit()
@@ -64,7 +76,7 @@ def login():
     else:
         return {"msg":"Contraseña incorreta"}, 415
 
-#PRODUCTO POST
+#CREA UN PRODUCTO POST
 @api.route("/product", methods=["POST"])
 @jwt_required()
 def create_product():
@@ -91,14 +103,13 @@ def create_product():
         return "error", 500
 
 
-#PRODUCTO GET
-@api.route("/product", methods=["GET"])
-def get_product():
+#RETORNA TODOS LOS PRODUCTO GET
+@api.route("/products", methods=["GET"])
+def get_products():
     Productos=Product.query.all()
-    return jsonify({"product":[product.serialize()for product in Productos]})
+    return jsonify({"products":[product.serialize()for product in Productos]})
 
-#POST TRANSACCIONES
-
+#CREA UN TRANSACCIONES
 @api.route("/transaccion", methods=["POST"])
 @jwt_required()
 def transaccion():
@@ -128,7 +139,7 @@ def transaccion():
 
 
 
-
+#RETORNA LAS TRANSACCIONES DEL USUARIO GET
 @api.route("/transaccion",  methods=["GET"])
 @jwt_required()
 def get_transaccion():
@@ -141,9 +152,19 @@ def get_transaccion():
     
     return jsonify({"transacciones":[transaccion.serialize()for transaccion in transacciones]})
 
-    
-
-
+# RUTA PARA BUSCAR PRODUCTOS
+@api.route('/search', methods=['POST'])
+def handle_filter_services():
+    name=request.json.get("name", None)
+    products = Product.query.filter((unaccent(Product.name).ilike("%"+name+"%"))).all()
+    response= []
+    for product in products:
+        response.append(product.serialize())
+    print(response)
+    if len(response) == 0:
+        return jsonify({"message" : "not found"}), 404
+    if products is not None:
+        return jsonify(response),200
 
 
 

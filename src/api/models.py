@@ -30,13 +30,13 @@ class User(db.Model):
 class Product(db.Model):
     # __tablename__ = 'Product'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), unique=True, nullable=False)
+    name = db.Column(db.String(200), unique=False, nullable=False)
     # date_created = db/Column(db.DateTime, default=datetime.utcnow)  <--- saving the date of creation in the DDBB
-    price = db.Column(db.Integer, unique=True, nullable=False)
-    product_img = db.Column(db.String(200), unique=True, nullable=False)
+    price = db.Column(db.Integer, unique=False, nullable=False)
+    product_img = db.Column(db.String(200), unique=False, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     user = db.relationship(User)
-    status = db.Column(db.String(200), unique=True, nullable=False)
+    status = db.Column(db.String(200), unique=False, nullable=False)
 
     # create a funcition  to return a string when we add something
 
