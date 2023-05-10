@@ -55,8 +55,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.ok) {
 						const body = await response.json()
 						setStore({...getStore().store,products:body})
+						return true
 					}else if (response.status == 404){
 						console.log("Producto no encontrado")
+						return false
 					}
 
 				} catch (error) {

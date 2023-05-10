@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
-import ProductCard from  "../component/productCard.jsx"
+import productGrid from  "../component/productGrid.jsx"
 import Product from  "../component/productGrid.jsx"
 
 export const Home = () => {
@@ -11,9 +11,9 @@ export const Home = () => {
     
 
     return (
-        <div className="text-center mt-5 d-flex" >
+        <div className="text-center mt-5 row" >
             {store.products && store.products.map((product) => {
-                return <Product key={product.id} product={product}></Product>
+                return <Product  key={product.id} product={product}></Product>
             })}
             
             

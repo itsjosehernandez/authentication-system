@@ -13,19 +13,19 @@ export const ProductForm = () => {
 
 			<div className="card m-5">
 				<div className="card-body m-5">
-					<h2 className="mb-5 mt-4">Empecemos completando algunos datos....</h2>
+					<h2 className="mb-5 mt-4">Publica tu Producto</h2>
 
 					<div className="mb-3">
-						<label htmlFor="formGroupExampleInput" className="form-label">Titulo</label>
+						<label htmlFor="formGroupExampleInput" className="form-label">Nombre del Producto</label>
 						<input type="text" className="form-control" id="formGroupExampleInput" placeholder="Este será el título. Ten en cuenta que cuando tengas ventas, no podrás editarlo." />
 					</div>
 
 					
 
 					<div className=" mb-3">
-						<label htmlFor="formGroupExampleInput" className="form-label">Descripcion</label>
+						<label htmlFor="formGroupExampleInput" className="form-label">Estado del producto</label>
 
-						<textarea className="form-control" aria-label="With textarea"></textarea>
+						<input className="form-control" aria-label="With textarea"></input>
 					</div>
 
 					<label htmlFor="formGroupExampleInput" className="form-label">Precio</label>
