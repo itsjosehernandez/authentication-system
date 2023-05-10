@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logoNavBar from "../../img/gaming-company-seeklogo.png";
+import logoNavBar from "../../img/OP2.png";
 
 export const Footer = () => (
 <footer className="w-100 py-4 flex-shrink-0 bg-dark ">
@@ -9,7 +9,7 @@ export const Footer = () => (
                     <h5 className="h1 text-white">
 						<a className="navbar-brand" href="#">
         			 	<img src={logoNavBar} alt="Bootstrap" width="85" height="85"></img>
-      					 </a></h5>
+      					</a></h5>
                     <p className="small text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
                     <p className="small text-muted mb-0">&copy; Copyrights. All rights reserved. <a className="text-primary" href="#">.com</a></p>
                 </div>

@@ -4,12 +4,13 @@ import Row from "react-bootstrap/Row";
 import wii from "../../img/imgWii.jpg";
 import React from "react";
 import Button from "react-bootstrap/Button";
+
 function Product({product}) {
   return (
     // <Row xs={1} md={3} lg={5} className="g-4 px-5">
       
-        <Col key={product.id}>
-          <Card>
+        <Col lg={3} md={3} xs={12}  key={product.id}>
+          <Card className= "my-3">
             <Card.Img variant="top" src={product.product_img} />
             <Card.Body>
               <Card.Title>{product.name}</Card.Title>
