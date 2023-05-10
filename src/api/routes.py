@@ -6,6 +6,11 @@ from api.models import db, User, Transaccion, Product
 from api.utils import generate_sitemap, APIException
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from sqlalchemy.sql.functions import ReturnTypeFromArgs
+import re
+
+class unaccent(ReturnTypeFromArgs):
+    pass
 
 api = Blueprint('api', __name__)
 
@@ -21,6 +26,7 @@ def handle_hello():
 # Registro de Usuario
 @api.route('/registro', methods=['POST'])
 def registro():
+    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     body = request.json
     
     email = body.get('email', None)
@@ -29,9 +35,15 @@ def registro():
     if email is None or password is None or pay is None :
         return{"error": "todos los datos requeridos"}, 400
 
+    if not re.match(email_pattern,email):
+        return jsonify({"error": "email no es valido"}), 400
+
+    if not re.match(email_pattern,pay):
+        return jsonify({"error": "pay no es valido"}), 400
+
     encripted_password = generate_password_hash(password)
     
-    new_user = User(email=email, password=encripted_password,pay=pay )
+    new_user = User(email=email, password=encripted_password, pay=pay)
     db.session.add(new_user)
     try:
         db.session.commit()
@@ -64,7 +76,7 @@ def login():
     else:
         return {"msg":"Contraseña incorreta"}, 415
 
-#PRODUCTO POST
+#CREA UN PRODUCTO POST
 @api.route("/product", methods=["POST"])
 @jwt_required()
 def create_product():
@@ -79,7 +91,7 @@ def create_product():
         return{"error": "no hemos encontrado su User_id"}
     if name is None or price is None or product_img is None or status is None:
         return{"error": "todos los datos requeridos"}, 460
-    new_product = Product(name=name, price=price, product_img=product_img, status=status)
+    new_product = Product(name=name, price=price, product_img=product_img, status=status, user_id=user.id)
     print(new_product)
     db.session.add(new_product)
     try:
@@ -91,27 +103,31 @@ def create_product():
         return "error", 500
 
 
-#PRODUCTO GET
-@api.route("/product", methods=["GET"])
-def get_product():
+#RETORNA TODOS LOS PRODUCTO GET
+@api.route("/products", methods=["GET"])
+def get_products():
     Productos=Product.query.all()
-    return jsonify({"product":[product.serialize()for product in Productos]})
+    return jsonify({"products":[product.serialize()for product in Productos]})
 
-#POST TRANSACCIONES
+#CREA UN TRANSACCIONES
 @api.route("/transaccion", methods=["POST"])
+@jwt_required()
 def transaccion():
     body = request.json
     product_id = body.get("product_id",None)
-    user_id = body.get("user_id",None)
     transaccion_status = body.get("transaccion_status",None)
+    is_user_registered = get_jwt_identity()
+    user = User.query.get(is_user_registered)
+    if user is None:
+        return{"error": "no hemos encontrado su User_id"}
 
-    if product_id is None or user_id is None or transaccion_status is None:
+    if product_id is None or transaccion_status is None:
         return {"error":"no se obtuvo la transaccion"},400
     product= Product.query.filter_by(id=product_id).one_or_none()
     if product is None:
         return {"error":"el producto no existe"},404  
         
-    new_transaccion = Transaccion(product_id=product_id, user_id=user_id,transaccion_status=transaccion_status)
+    new_transaccion = Transaccion(product_id=product_id, user_id=user.id,transaccion_status=transaccion_status)
     db.session.add(new_transaccion) 
     try:
         db.session.commit()
@@ -123,17 +139,32 @@ def transaccion():
 
 
 
-
-@api.route("/transaccion")
+#RETORNA LAS TRANSACCIONES DEL USUARIO GET
+@api.route("/transaccion",  methods=["GET"])
+@jwt_required()
 def get_transaccion():
-    body= request.json
-    user_id=body.get("user_id",None)
-    transacciones=Transaccion.query.filter_by(user_id=user_id).all()
+    is_user_registered = get_jwt_identity()
+    user = User.query.get(is_user_registered)
+    if user is None:
+        return{"error": "no hemos encontrado su User_id"}
+    transacciones=Transaccion.query.filter_by(user_id=user.id).all()
+    
+    
     return jsonify({"transacciones":[transaccion.serialize()for transaccion in transacciones]})
 
-    
-
-
+# RUTA PARA BUSCAR PRODUCTOS
+@api.route('/search', methods=['POST'])
+def handle_filter_services():
+    name=request.json.get("name", None)
+    products = Product.query.filter((unaccent(Product.name).ilike("%"+name+"%"))).all()
+    response= []
+    for product in products:
+        response.append(product.serialize())
+    print(response)
+    if len(response) == 0:
+        return jsonify({"message" : "not found"}), 404
+    if products is not None:
+        return jsonify(response),200
 
 
 
