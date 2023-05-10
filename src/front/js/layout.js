@@ -10,7 +10,7 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Home } from "./pages/home";
-import { Product } from "./pages/ProductDetails.jsx";
+import { ProductForm } from "./pages/productForm.jsx";
 import { Register } from "./pages/register";
 
 
