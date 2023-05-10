@@ -79,7 +79,7 @@ def create_product():
         return{"error": "no hemos encontrado su User_id"}
     if name is None or price is None or product_img is None or status is None:
         return{"error": "todos los datos requeridos"}, 460
-    new_product = Product(name=name, price=price, product_img=product_img, status=status)
+    new_product = Product(name=name, price=price, product_img=product_img, status=status, user_id=user.id)
     print(new_product)
     db.session.add(new_product)
     try:
@@ -98,20 +98,25 @@ def get_product():
     return jsonify({"product":[product.serialize()for product in Productos]})
 
 #POST TRANSACCIONES
+
 @api.route("/transaccion", methods=["POST"])
+@jwt_required()
 def transaccion():
     body = request.json
     product_id = body.get("product_id",None)
-    user_id = body.get("user_id",None)
     transaccion_status = body.get("transaccion_status",None)
+    is_user_registered = get_jwt_identity()
+    user = User.query.get(is_user_registered)
+    if user is None:
+        return{"error": "no hemos encontrado su User_id"}
 
-    if product_id is None or user_id is None or transaccion_status is None:
+    if product_id is None or transaccion_status is None:
         return {"error":"no se obtuvo la transaccion"},400
     product= Product.query.filter_by(id=product_id).one_or_none()
     if product is None:
         return {"error":"el producto no existe"},404  
         
-    new_transaccion = Transaccion(product_id=product_id, user_id=user_id,transaccion_status=transaccion_status)
+    new_transaccion = Transaccion(product_id=product_id, user_id=user.id,transaccion_status=transaccion_status)
     db.session.add(new_transaccion) 
     try:
         db.session.commit()
@@ -124,11 +129,16 @@ def transaccion():
 
 
 
-@api.route("/transaccion")
+@api.route("/transaccion",  methods=["GET"])
+@jwt_required()
 def get_transaccion():
-    body= request.json
-    user_id=body.get("user_id",None)
-    transacciones=Transaccion.query.filter_by(user_id=user_id).all()
+    is_user_registered = get_jwt_identity()
+    user = User.query.get(is_user_registered)
+    if user is None:
+        return{"error": "no hemos encontrado su User_id"}
+    transacciones=Transaccion.query.filter_by(user_id=user.id).all()
+    
+    
     return jsonify({"transacciones":[transaccion.serialize()for transaccion in transacciones]})
 
     
