@@ -52,15 +52,16 @@ export const Inicio = () => {
 </div>
 
 
- <div><h2 className="text-center style">Que es TradeaTodo?</h2></div>  
+<div><h2 className="text-center style">Que es TradeaTodo?</h2></div>  
 
- <hr></hr>
+<hr></hr>
 
- <div className="container text-center mt-5 mb-5">
+
+<div className="container text-center mt-5 mb-5">
   <div className="row align-items-start">
     <div className="col">
     <h5  className="mb-3"> <i className="fa-solid fa-users-between-lines icon"></i>Trade Finder</h5>
-   TradeaTodo es un buscador de comercio. Brindamos la forma más segura y rápida de encontrar los intercambios que desea con otros grandes jugadores. ¡Tenemos millones de jugadores en juegos como Roblox, Animal Crossing, Diablo y más!
+  TradeaTodo es un buscador de comercio. Brindamos la forma más segura y rápida de encontrar los intercambios que desea con otros grandes jugadores. ¡Tenemos millones de jugadores en juegos como Roblox, Animal Crossing, Diablo y más!
     </div>
     <div className="col">
     <h5 className="mb-3"><i className="fa-solid fa-handshake-simple icon"></i>¿Como funciona?</h5>
@@ -72,7 +73,7 @@ export const Inicio = () => {
         </div>
   </div>
 </div>
- </>
+</>
 
 
 
@@ -95,3 +96,4 @@ export const Inicio = () => {
 
 
 };
+

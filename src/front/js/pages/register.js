@@ -3,6 +3,8 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export const Register = () => {
@@ -22,16 +24,27 @@ export const Register = () => {
     function registro(event) {
         event.preventDefault()
         actions.handleRegister(userInfo.email, userInfo.password, userInfo.pay)
+        toast('Registro Exitoso', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
     }
     const ingresar = async (event) => {
         event.preventDefault()
         const response = actions.handleLogin(userInfo.email, userInfo.password,)
         console.log(response)
-        if (await response) navigate("/pages/home")
-
+        if (await response) navigate("/")
     }
+    
     return (<>
 
+        <ToastContainer />
         <div className="container py-5">
 
 

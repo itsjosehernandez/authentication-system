@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 
 
 export const ProductForm = () => {
-
 	return (
 
 		<div className="container">
@@ -15,7 +16,7 @@ export const ProductForm = () => {
 
 					<div className="mb-3">
 						<label htmlFor="formGroupExampleInput" className="form-label">Nombre del Producto</label>
-						<input type="text" className="form-control" id="formGroupExampleInput" placeholder="Este será el título. Ten en cuenta que cuando tengas ventas, no podrás editarlo." />
+						<input type="text" className="form-control"  placeholder="Este será el título. Ten en cuenta que cuando tengas ventas, no podrás editarlo." />
 					</div>
 
 					
@@ -36,9 +37,9 @@ export const ProductForm = () => {
 
 					<div className="mb-3">
 						<label htmlFor="formFileMultiple" className="form-label">Agregar una foto del articulo</label>
-						<input className="form-control" type="file" id="formFileMultiple" multiple />
+						<input className="form-control" type="file"  multiple />
 					</div>
-					<button type="button" className="btn btn-primary">Cargar..</button>
+					<button type="button" className="btn btn-primary">Publicar</button>
 
 				</div>
 

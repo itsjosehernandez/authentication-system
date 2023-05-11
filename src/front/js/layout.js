@@ -19,6 +19,7 @@ import { ProductDetails } from "./pages/ProductDetails.jsx";
 
 
 
+
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -33,7 +34,6 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-
                         <Route element={<Inicio />} path="/" />
                         <Route element={<ProductForm/>} path="/productform" />
                         <Route element={<Demo />} path="/demo" />
@@ -42,6 +42,7 @@ const Layout = () => {
                         <Route element={<Home/>} path="/pages/home"/>
                         <Route element={<Register/>} path="/register"/>
                         <Route element={<ProductDetails/>} path="/productdetails/:id"/>
+
 
                     </Routes>
                     

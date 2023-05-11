@@ -16,9 +16,9 @@ function Product({product}) {
             <Card.Body>
               <Card.Title>{product.name}</Card.Title>
               <Card.Text>{product.status}</Card.Text>
-              <Card.Subtitle className="mb-2 text-muted">
+              {/* <Card.Subtitle className="mb-2 text-muted">
                 Diegoarraez10@hotmail.com
-              </Card.Subtitle>
+              </Card.Subtitle> */}
               <Card.Text>
                 <strong>Price: </strong>{product.price}
               </Card.Text>
