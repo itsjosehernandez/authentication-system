@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import wii from "../../img/imgWii.jpg";
 import React from "react";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 function Product({product}) {
   return (
@@ -22,8 +23,8 @@ function Product({product}) {
                 <strong>Price: </strong>{product.price}
               </Card.Text>
               <Row xs={1} md={1} lg={1} className="g-3">
-                <Button variant="primary">Add to cart</Button>
-                <Button variant="primary">Details</Button>
+                
+                <Link to={`/productDetails/${product.id}`} variant="primary">Details</Link>
                 <Button variant="primary">Buy now!</Button>
               </Row>
             </Card.Body>

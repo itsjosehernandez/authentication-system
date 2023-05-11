@@ -109,7 +109,12 @@ def get_products():
     Productos=Product.query.all()
     return jsonify({"products":[product.serialize()for product in Productos]})
 
-#CREA UN TRANSACCIONES
+@api.route("/product/<int:id>", methods=["GET"])
+def get_product(id):
+    Productos=Product.query.filter_by(id=id).first()
+    return jsonify(Productos.serialize())
+
+#CREA UNA TRANSACCION
 @api.route("/transaccion", methods=["POST"])
 @jwt_required()
 def transaccion():
