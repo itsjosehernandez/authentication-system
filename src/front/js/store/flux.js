@@ -9,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			products:[]
 		},
 		actions: {
+			//FETCH REGISTRO DE USUARIO 
 			handleRegister: async (email, password, pay) => {
 				// Previene el refrescamiento predeterminado de los form
 				console.log(email, password, pay)
@@ -20,7 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (!response.ok) return alert("hubo un error con la solicitud")
 				console.log("Registro exitoso")
 			},
-
+			//FECTH LOGIN DE USUARIO
 			handleLogin: async (email, password) => {
 				console.log(email, password)
 				const response = await fetch(`${process.env.BACKEND_URL}/api/login`, {
@@ -40,11 +41,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				JSON.stringify(localStorage.setItem("token", data.access_token));
 				return true;
 			},
+			//CERRAR SECCION
 			handleLogout: () => {
 				localStorage.removeItem("token")
 				setStore({ ...getStore().store, token: null });
 				return true
 			},
+			//BUSCAR PRODUCTOS
 			handleSearch: async (name) =>{
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/api/search`, {
@@ -64,13 +67,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log(error)
 				}
-
-			} 
+			}, 
+			handleCreateProduct: async (name, product_img, price, status) => {
+				console.log(name, product_img, price, status)
+				const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
+					method: "POST",
+					body: JSON.stringify({ "name": name, "product_img": product_img, "price": price, "status":status }),
+					headers: { "Content-Type": "application/json" }
+				})
+				if (!response.ok) return alert("hubo un error con la creacion del producto")
+				console.log("Producto creado con exito")
 		}
 
 	}
 };
 
-
+}
 
 export default getState;

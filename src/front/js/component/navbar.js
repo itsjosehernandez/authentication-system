@@ -46,7 +46,7 @@ export const Navbar = () => {
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
                             <li className="nav-item">
-                                <a className="nav-link text-light" href="#">Deals</a>
+                                <a className="nav-link text-light" href="#">About Us</a>
                             </li>
 
 

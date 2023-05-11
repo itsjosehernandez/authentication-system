@@ -10,8 +10,10 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Home } from "./pages/home";
-import { Product } from "./pages/ProductDetails.jsx";
+// import { Product } from "./pages/ProductDetails.jsx";
 import { Register } from "./pages/register";
+import { ProductForm } from "./pages/productForm.jsx";
+
 
 
 
@@ -32,7 +34,6 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-
                         <Route element={<Inicio />} path="/" />
                         <Route element={<ProductForm/>} path="/productform" />
                         <Route element={<Demo />} path="/demo" />
@@ -40,6 +41,7 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<Home/>}path="/pages/home"/>
                         <Route element={<Register/>}path="/register"/>
+                        
                     </Routes>
                     
                     <Footer />
