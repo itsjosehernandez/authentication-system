@@ -10,9 +10,9 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Home } from "./pages/home";
-// import { Product } from "./pages/ProductDetails.jsx";
-import { Register } from "./pages/register";
 import { ProductForm } from "./pages/productForm.jsx";
+import { Register } from "./pages/register";
+import { ProductDetails } from "./pages/ProductDetails.jsx";
 
 
 
@@ -39,9 +39,11 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
-                        <Route element={<Home/>}path="/pages/home"/>
-                        <Route element={<Register/>}path="/register"/>
-                        
+                        <Route element={<Home/>} path="/pages/home"/>
+                        <Route element={<Register/>} path="/register"/>
+                        <Route element={<ProductDetails/>} path="/productdetails/:id"/>
+
+
                     </Routes>
                     
                     <Footer />

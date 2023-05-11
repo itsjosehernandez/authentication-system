@@ -56,6 +56,7 @@ export const Inicio = () => {
 
 <hr></hr>
 
+
 <div className="container text-center mt-5 mb-5">
   <div className="row align-items-start">
     <div className="col">
