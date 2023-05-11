@@ -1,0 +1,18 @@
+.main {
+  position: relative;
+  background-image: url("https://idsb.tmgrup.com.tr/ly/uploads/images/2021/03/29/103616.jpg");
+  background-size: cover;
+  background-position: 50%;
+  width: 100vw;
+  height: 50vh;
+}
+
+.mt {
+  margin-top: 95px;
+}
+
+.mtdescription{
+    margin-top:120px;
+
+
+}
