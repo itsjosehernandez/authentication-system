@@ -13,6 +13,7 @@ import { Home } from "./pages/home";
 import { ProductForm } from "./pages/productForm.jsx";
 import { Register } from "./pages/register";
 import { ProductDetails } from "./pages/ProductDetails.jsx";
+import { ProductSearch } from "./pages/ProductSearch.jsx";
 
 
 
@@ -42,6 +43,7 @@ const Layout = () => {
                         <Route element={<Home/>} path="/pages/home"/>
                         <Route element={<Register/>} path="/register"/>
                         <Route element={<ProductDetails/>} path="/productdetails/:id"/>
+                        <Route element={<ProductSearch/>} path="/productsearch"/>
 
 
                     </Routes>

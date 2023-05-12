@@ -17,9 +17,7 @@ export const ProductDetails = () => {
   // filtro store por mis products buscando un id igual a el de los parametros lo va a guardar en product
   const getProduct = async () => {
     try {
-      const response = await fetch(
-        `https://3001-diegoarraez-flaskproyec-pfq6jknnt8j.ws-us97.gitpod.io/api/product/${id}`
-      ); //<-- ruta dinamica creada//
+      const response = await fetch(`${process.env.BACKEND_URL}/api/product/${id}`); //<-- ruta dinamica creada//
       const data = await response.json();
       SetProductDetail(data);
     } catch (error) {

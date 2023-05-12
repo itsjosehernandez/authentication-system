@@ -1,4 +1,4 @@
-
+import { toast } from "react-toastify";
 const getState = ({ getStore, getActions, setStore }) => {
 
 	return {
@@ -6,7 +6,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: localStorage.getItem("token") || null,
 			message: null,
 			// creando store para almacenar productos
-			products:[]
+			products: [],
+			productSearch: []
 		},
 		actions: {
 			//FETCH REGISTRO DE USUARIO 
@@ -48,7 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return true
 			},
 			//BUSCAR PRODUCTOS
-			handleSearch: async (name) =>{
+			handleSearch: async (name) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/api/search`, {
 						method: "POST",
@@ -57,9 +58,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 					if (response.ok) {
 						const body = await response.json()
-						setStore({...getStore().store,products:body})
+						setStore({ ...getStore().store, productSearch: body })
 						return true
-					}else if (response.status == 404){
+					} else if (response.status == 404) {
 						console.log("Producto no encontrado")
 						return false
 					}
@@ -67,20 +68,52 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log(error)
 				}
-			}, 
+			},
+
+			getProducts: async (name) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/search`, {
+						method: "POST",
+						body: JSON.stringify({ "name": name }),
+						headers: { "Content-Type": "application/json" }
+					});
+					if (response.ok) {
+						const body = await response.json()
+						setStore({ ...getStore().store, products: body })
+						return true
+					} else if (response.status == 404) {
+						console.log("Producto no encontrado")
+						return false
+					}
+
+				} catch (error) {
+					console.log(error)
+				}
+			},
 			handleCreateProduct: async (name, product_img, price, status) => {
 				console.log(name, product_img, price, status)
 				const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
 					method: "POST",
-					body: JSON.stringify({ "name": name, "product_img": product_img, "price": price, "status":status }),
+					body: JSON.stringify({ "name": name, "product_img": product_img, "price": price, "status": status }),
 					headers: { "Content-Type": "application/json" }
 				})
 				if (!response.ok) return alert("hubo un error con la creacion del producto")
 				console.log("Producto creado con exito")
-		}
+			},
 
-	}
-};
+			handleTransaccion: async (product_id) => {
+				console.log(product_id)
+				const response = await fetch(`${process.env.BACKEND_URL}/api/transaccion`, {
+					method: "POST",
+					body: JSON.stringify({ "product_id": product_id }),
+					headers: { "Content-Type": "application/json", authorization: `Bearer ${getStore().token}` }
+				})
+				if (!response.ok) return alert("hubo un error con la transaccion")
+				toast("Producto creada con exito")
+			}
+
+		}
+	};
 
 }
 

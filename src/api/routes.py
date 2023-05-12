@@ -120,7 +120,7 @@ def get_product(id):
 def transaccion():
     body = request.json
     product_id = body.get("product_id",None)
-    transaccion_status = body.get("transaccion_status",None)
+    transaccion_status = "pending"
     is_user_registered = get_jwt_identity()
     user = User.query.get(is_user_registered)
     if user is None:
