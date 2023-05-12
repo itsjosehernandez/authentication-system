@@ -21,7 +21,7 @@ export const UserActions = () => {
                 <button className="nav-link" onClick={()=>{actions.handleLogout() ? navigate("/"):""}}>Logout</button>
             </li>
             <li className="nav-item ">
-                <button className="nav-link active" onClick={()=>{navigate("/productform")}}  aria-expanded="page">
+                <button className="nav-link active" onClick={()=>{navigate("/productform")}} data-bs-dismiss="offcanvas" aria-expanded="page">
                     Publica tu producto
                 </button>
             </li>
