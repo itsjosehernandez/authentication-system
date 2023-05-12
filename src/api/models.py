@@ -61,7 +61,7 @@ class Transaccion(db.Model):
     product = db.relationship(Product)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     user = db.relationship(User)
-    transaccion_status = db.Column(db.String(200), unique=True, nullable=False)
+    transaccion_status = db.Column(db.String(200), unique=False, nullable=False)
 
     # create a funcition  to return a string when we add something
     def __repr__(self):

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../../styles/offcanvas.css";
 
 export const UserActions = () => {
+
 	const { actions } = useContext(Context)
 	const navigate = useNavigate()
 	return (

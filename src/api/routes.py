@@ -109,13 +109,18 @@ def get_products():
     Productos=Product.query.all()
     return jsonify({"products":[product.serialize()for product in Productos]})
 
-#CREA UN TRANSACCIONES
+@api.route("/product/<int:id>", methods=["GET"])
+def get_product(id):
+    Productos=Product.query.filter_by(id=id).first()
+    return jsonify(Productos.serialize())
+
+#CREA UNA TRANSACCION
 @api.route("/transaccion", methods=["POST"])
 @jwt_required()
 def transaccion():
     body = request.json
     product_id = body.get("product_id",None)
-    transaccion_status = body.get("transaccion_status",None)
+    transaccion_status = "pending"
     is_user_registered = get_jwt_identity()
     user = User.query.get(is_user_registered)
     if user is None:

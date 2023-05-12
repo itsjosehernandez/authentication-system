@@ -1,19 +1,37 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/galeriaproductos.css";
 import "../../styles/productDetails.css";
 import onizuka from "../../img/onizuka.jpg";
 import logo from "../../img/OP2.png";
+import { useParams } from "react-router-dom";
 
 export const ProductDetails = () => {
   const { store, actions } = useContext(Context);
   const [bigPicture, setBigPicture] = useState("");
-
+  const { id } = useParams();
+  const [productDetail, SetProductDetail] = useState({});
   const imgDisplay = (event) => {
     console.log(event);
-    
   };
-
+  // filtro store por mis products buscando un id igual a el de los parametros lo va a guardar en product
+  const getProduct = async () => {
+    try {
+      const response = await fetch(`${process.env.BACKEND_URL}/api/product/${id}`); //<-- ruta dinamica creada//
+      const data = await response.json();
+      SetProductDetail(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    // const product = store.products.find(product =>product.id==id)
+    // SetProductDetail(product)
+    // console.log(product)
+    getProduct();
+  }, []);
+  console.log(id);
+  console.log(store.products);
   return (
     <div className="container text-center py-5 ">
       <div className="row ">
@@ -27,7 +45,7 @@ export const ProductDetails = () => {
               <img src={logo} onClick={imgDisplay}></img>
             </div>
             <div className="img-container col-sd-1 col-md-6 col-lg p-2 float-end ">
-              <img id="imageBox" src={bigPicture}></img>
+              <img id="imageBox" src={productDetail.product_img}></img>
             </div>
           </div>
         </div>
@@ -35,7 +53,7 @@ export const ProductDetails = () => {
         <div className="col flex-column  mb-3 ">
           <div className="float-start d-flex align-items-start flex-column">
             <div className="p-2">
-              <h1 className=" float-start">Titulo</h1>
+              <h1 className=" float-start">{productDetail.name}</h1>
             </div>
 
             <div className="p-2 float-start">
@@ -47,26 +65,26 @@ export const ProductDetails = () => {
             </div>
 
             <div className="p-2">
-              <h2 className="float-start">$00.00</h2>
+              <h2 className="float-start">{productDetail.price}</h2>
             </div>
             <div className="p-2">
-              <h6 className="float-start">Vendedor: Ridex</h6>
+              <h6 className="float-start">{productDetail.user_id}</h6>
             </div>
             <div className="p-2">
-              <h6 className="float-start">Tipo de producto: Juegos</h6>
+              {/* <h6 className="float-start">Tipo de producto: Juegos</h6> */}
             </div>
             <div className="p-2">
-              <h6 className="float-start">Agregar a lista de deseo</h6>
+              {/* <h6 className="float-start">Agregar a lista de deseo</h6> */}
             </div>
 
-            <div className="p-2">
+            {/* <div className="p-2">
               <h6 className="float-start">Cantidades:</h6>
             </div>
             <div className="d-flex float-start">
               <div className="p-2 cuadrado ">+</div>
               <div className="p-2 lines">2</div>
               <div className="p-2 cuadrado">-</div>
-            </div>
+            </div> */}
 
             <div className="flex-column">
               <div className="p-2 rectangulo">Comprar Ahora!</div>

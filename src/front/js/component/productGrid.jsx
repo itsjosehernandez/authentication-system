@@ -2,10 +2,17 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import wii from "../../img/imgWii.jpg";
-import React from "react";
+import React, {useContext} from "react";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
+
+
+
+
 
 function Product({product}) {
+  const {store,actions}= useContext(Context)
   return (
     // <Row xs={1} md={3} lg={5} className="g-4 px-5">
       
@@ -15,16 +22,16 @@ function Product({product}) {
             <Card.Body>
               <Card.Title>{product.name}</Card.Title>
               <Card.Text>{product.status}</Card.Text>
-              <Card.Subtitle className="mb-2 text-muted">
+              {/* <Card.Subtitle className="mb-2 text-muted">
                 Diegoarraez10@hotmail.com
-              </Card.Subtitle>
+              </Card.Subtitle> */}
               <Card.Text>
                 <strong>Price: </strong>{product.price}
               </Card.Text>
               <Row xs={1} md={1} lg={1} className="g-3">
-                <Button variant="primary">Add to cart</Button>
-                <Button variant="primary">Details</Button>
-                <Button variant="primary">Buy now!</Button>
+                
+                <Link to={`/productDetails/${product.id}`} variant="primary">Details</Link>
+                <Button variant="primary" onClick={()=>actions.handleTransaccion(product.id)}>Buy now!</Button>
               </Row>
             </Card.Body>
           </Card>

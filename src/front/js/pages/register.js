@@ -3,6 +3,8 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export const Register = () => {
@@ -22,16 +24,28 @@ export const Register = () => {
     function registro(event) {
         event.preventDefault()
         actions.handleRegister(userInfo.email, userInfo.password, userInfo.pay)
+        toast('Registro Exitoso', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+        setUSerInfo({"email":"", "password":"", "pay":""})
     }
     const ingresar = async (event) => {
         event.preventDefault()
         const response = actions.handleLogin(userInfo.email, userInfo.password,)
         console.log(response)
-        if (await response) navigate("/pages/home")
-
+        if (await response) navigate("/")
     }
+    
     return (<>
 
+        <ToastContainer />
         <div className="container py-5">
 
 
@@ -141,7 +155,8 @@ export const Register = () => {
                                                     <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                                                     <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
                                                 </div>
-                                                <button onClick={(event) => { registro(event) }} type="submit" className="btn btn-primary">Submit</button>
+                                                <button onClick={(event) => { registro(event) }} type="submit" className="btn btn-primary"  >Submit</button>
+                                                
                                             </form>
                                         </div>
                                     </p>

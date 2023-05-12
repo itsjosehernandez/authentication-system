@@ -3,14 +3,16 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import Product from  "../component/productGrid.jsx"
 
-export const Home = () => {
+export const ProductSearch = () => {
     const { store, actions } = useContext(Context);
     console.log(store.token)
     
 
     return (
+        
         <div className="text-center mt-5 row" >
-            {store.products && store.products.map((product) => {
+            <p>Busqueda</p>
+            {store.productSearch && store.productSearch.map((product) => {
                 return <Product  key={product.id} product={product}></Product>
             })}
             
