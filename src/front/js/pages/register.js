@@ -34,6 +34,7 @@ export const Register = () => {
             progress: undefined,
             theme: "light",
             });
+        setUSerInfo({"email":"", "password":"", "pay":""})
     }
     const ingresar = async (event) => {
         event.preventDefault()
@@ -154,7 +155,8 @@ export const Register = () => {
                                                     <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                                                     <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
                                                 </div>
-                                                <button onClick={(event) => { registro(event) }} type="submit" className="btn btn-primary">Submit</button>
+                                                <button onClick={(event) => { registro(event) }} type="submit" className="btn btn-primary"  >Submit</button>
+                                                
                                             </form>
                                         </div>
                                     </p>

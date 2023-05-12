@@ -17,7 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const response = await fetch(`${process.env.BACKEND_URL}/api/registro`, {
 					method: "POST",
 					body: JSON.stringify({ "email": email, "password": password, "pay": pay }),
-					headers: { "Content-Type": "application/json" }
+					headers: { "Content-Type": "application/json" },
 				})
 				if (!response.ok) return alert("hubo un error con la solicitud")
 				console.log("Registro exitoso")
@@ -90,8 +90,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error)
 				}
 			},
+			//CREAR PRODUCTO
 			handleCreateProduct: async (name, product_img, price, status) => {
 				console.log(name, product_img, price, status)
+				return
 				const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
 					method: "POST",
 					body: JSON.stringify({ "name": name, "product_img": product_img, "price": price, "status": status }),
@@ -101,11 +103,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("Producto creado con exito")
 			},
 
-			handleTransaccion: async (product_id) => {
-				console.log(product_id)
+			handleTransaccion: async (product_id, transaccion_status) => {
+				console.log(product_id, transaccion_status)
 				const response = await fetch(`${process.env.BACKEND_URL}/api/transaccion`, {
 					method: "POST",
-					body: JSON.stringify({ "product_id": product_id }),
+					body: JSON.stringify({ "product_id": product_id, "transaccion_status": transaccion_status }),
 					headers: { "Content-Type": "application/json", authorization: `Bearer ${getStore().token}` }
 				})
 				if (!response.ok) return alert("hubo un error con la transaccion")
