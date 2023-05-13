@@ -72,7 +72,7 @@ def login():
     if check_password_hash(is_user_registered.password, password):      
         token = create_access_token(identity = is_user_registered.id)     
         print(token)
-        return jsonify({"access_token": token})
+        return jsonify({"access_token": token, "email": email})
     else:
         return {"msg":"Contraseña incorreta"}, 415
 

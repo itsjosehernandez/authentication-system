@@ -31,7 +31,7 @@ function Product({product}) {
               <Row xs={1} md={1} lg={1} className="g-3">
                 
                 <Link to={`/productDetails/${product.id}`} variant="primary">Details</Link>
-                <Button variant="primary" onClick={()=>actions.handleTransaccion(product.id)}>Buy now!</Button>
+                <Button variant="primary" onClick={()=>actions.handleTransaccion(product.id, product.status)}>Buy now!</Button>
               </Row>
             </Card.Body>
           </Card>
