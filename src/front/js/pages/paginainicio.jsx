@@ -40,9 +40,9 @@ export const Inicio = () => {
 
               </div>
               </div>   
-           </div>
           </div>
-         </div>
+          </div>
+        </div>
 
         </div>
 
@@ -73,6 +73,7 @@ export const Inicio = () => {
     ¿Cuál es la diferencia entre Traderie y los sitios del mercado negro? NO permitimos ningún tipo de transacciones con dinero real en nuestro sitio. La venta de elementos del juego por dinero real es ilegal. Su seguridad es nuestra prioridad, solo intercambie artículos del juego por otros artículos del juego.
         </div>
   </div>
+</div>
 </div>
     
     </>

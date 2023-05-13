@@ -7,7 +7,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			// creando store para almacenar productos
 			products: [],
-			productSearch: []
+			productSearch: [],
+			transacciones: [],
+			user: localStorage.getItem("email") || ""
 		},
 		actions: {
 			//FETCH REGISTRO DE USUARIO 
@@ -38,8 +40,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const data = await response.json();
 				const store = getStore();
-				setStore({ ...store, token: data.access_token });
+				setStore({ ...store, token: data.access_token, user:data.email });
 				JSON.stringify(localStorage.setItem("token", data.access_token));
+				JSON.stringify(localStorage.setItem("email", data.email));
 				return true;
 			},
 			//CERRAR SECCION
@@ -112,11 +115,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				if (!response.ok) return alert("hubo un error con la transaccion")
 				toast("Producto creada con exito")
-			}
-
+			},
+			getTransacciones: async () =>{
+				const response = await fetch(`${process.env.BACKEND_URL}/api/transaccion`, {
+					method: "GET",
+					headers: { "Content-Type": "application/json", authorization: `Bearer ${getStore().token}` }
+				}) 
+				if (!response.ok) return alert("hubo un error con la transaccion")
+				const data = await response.json ()
+				const store = getStore()
+				setStore({...store, transacciones:data.transacciones})
 		}
-	};
-
+	},
+	}
 }
 
 export default getState;
