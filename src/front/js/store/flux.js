@@ -94,13 +94,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			//CREAR PRODUCTO
-			handleCreateProduct: async (name, product_img, price, status) => {
-				console.log(name, product_img, price, status)
-				return
+			handleCreateProduct: async (data) => {
+				
+				let token = localStorage.getItem("token")
 				const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
 					method: "POST",
-					body: JSON.stringify({ "name": name, "product_img": product_img, "price": price, "status": status }),
-					headers: { "Content-Type": "application/json" }
+					body: JSON.stringify(data),
+					headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`  }
 				})
 				if (!response.ok) return alert("hubo un error con la creacion del producto")
 				console.log("Producto creado con exito")

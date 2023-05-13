@@ -8,7 +8,7 @@ export const UserActions = () => {
 	const { actions, store } = useContext(Context)
 	const navigate = useNavigate()
 	return (
-		<div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+		<div className="offcanvas offcanvas-end" data-bs-dismiss="offcanvas" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 			<div className="offcanvas-header">
 
 				<h5 className="offcanvas-title text-center" id="offcanvasRightLabel">Perfil</h5>
@@ -20,18 +20,18 @@ export const UserActions = () => {
 				<div className="d-flex justify-content-center ">
 					<img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" className="img-thumbnail rounded-circle userimagen " alt="..." />
 				</div>
-				<h4 className="text-center">Name</h4>
-				<h6 className="text-center">{store.user}</h6>
+				{/* <h4 className="text-center">Name</h4> */}
+				<h4 className="text-center">{store.user}</h4>
 
 				<ul className="navbar-nav flex-grow-1 pe-3 text-start py-3">
 
 					<div className="container text-center">
 						<div className="row">
-							<div className="col">
-								<li className="nav-item">
+							{/* <div className="col"> */}
+								{/* <li className="nav-item">
 									<Link to={"/pages/home"} className="nav-link active " aria-current="page" >Tienda <i className="fa-solid fa-store"></i></Link>
 								</li>
-							</div>
+							</div> */}
 							<div className="col">
 								<li className="nav-item ">
 									<button className="btn btn-success btn-sm" data-bs-dismiss="offcanvas" onClick={() => { navigate("/productform") }} aria-expanded="page">
