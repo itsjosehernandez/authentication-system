@@ -1,14 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/offcanvas.css";
+import Product from  "../component/productGrid.jsx"
 
 export const UserActions = () => {
 
 	const { actions, store } = useContext(Context)
 	const navigate = useNavigate()
+	useEffect(() => {
+		console.log ("por favor")
+		actions.getUserProducts()
+	},[])
 	return (
-		<div className="offcanvas offcanvas-end" data-bs-dismiss="offcanvas" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+		<div className="offcanvas offcanvas-end"  tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 			<div className="offcanvas-header">
 
 				<h5 className="offcanvas-title text-center" id="offcanvasRightLabel">Perfil</h5>
@@ -67,31 +72,6 @@ export const UserActions = () => {
 					<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
 
 					<div><h6>Notificaciones</h6></div>
-					<div class="card mb-3 ">
-						<img src="https://i.blogs.es/352301/switch/1366_2000.webp" class="card-img-top" alt="..." />
-						<div class="card-body">
-							<p class="card-text">Para concretar tu compra debes realizar el pago.</p>
-							<button className="btn btn-success btn-sm"> Reportar pago
-							</button>
-						</div>
-					</div>
-
-					<div className="card mb-3">
-						<img src="https://i.blogs.es/885597/ps5apfinal/1366_2000.jpg" className="card-img-top" alt="..." />
-						<div className="card-body">
-							<p className="card-text">Para concretar tu compra debes realizar el pago.</p>
-							<button className="btn btn-success btn-sm"> Reportar pago
-							</button>
-						</div>
-					</div>
-
-					</div>
-					<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">					
-					
-					
-					<div><h6>Mis productos</h6></div>
-					</div>
-					</div>
 					{store.transacciones.map((transaccion)=>{
 					return (
 						<div key={transaccion.id}>
@@ -100,11 +80,15 @@ export const UserActions = () => {
 					)
 				})}
 
-
-
-
+					</div>
+					<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">					
+					<div><h6>Mis productos</h6></div>
+					{store.user_products && store.user_products.map((product) => {
+                	return <Product  key={product.id} product={product}></Product>})}
+					</div>
+					</div>
+					</div>
+					
 				</div>
-
-		</div>
 	)
 }

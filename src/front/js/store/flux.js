@@ -73,16 +73,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			getProducts: async (name) => {
+			getProducts: async () => {
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/api/search`, {
-						method: "POST",
-						body: JSON.stringify({ "name": name }),
+					const response = await fetch(`${process.env.BACKEND_URL}/api/products`, {
 						headers: { "Content-Type": "application/json" }
 					});
 					if (response.ok) {
 						const body = await response.json()
-						setStore({ ...getStore().store, products: body })
+						setStore({ ...getStore().store, products: body.products })
 						return true
 					} else if (response.status == 404) {
 						console.log("Producto no encontrado")
@@ -95,7 +93,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			//CREAR PRODUCTO
 			handleCreateProduct: async (data) => {
-				
 				let token = localStorage.getItem("token")
 				const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
 					method: "POST",
@@ -103,7 +100,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`  }
 				})
 				if (!response.ok) return alert("hubo un error con la creacion del producto")
+				getActions().getUserProducts()
+				getActions().getProducts()
 				console.log("Producto creado con exito")
+			},
+
+			getUserProducts: async () => {
+				let token = localStorage.getItem("token")
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/user-products`, {
+						headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`  }
+					});
+					if (response.ok) {
+						const body = await response.json()
+						setStore({ user_products : body.products })
+						return true
+					} else if (response.status == 404) {
+						console.log("Usuario no tiene productos")
+						return false
+					}
+
+				} catch (error) {
+					console.log(error)
+				}
 			},
 
 			handleTransaccion: async (product_id, transaccion_status) => {
