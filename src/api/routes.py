@@ -72,7 +72,7 @@ def login():
     if check_password_hash(is_user_registered.password, password):      
         token = create_access_token(identity = is_user_registered.id)     
         print(token)
-        return jsonify({"access_token": token, "email": email})
+        return jsonify({"access_token": token, "email": email, "user_id":is_user_registered.id})
     else:
         return {"msg":"Contraseña incorreta"}, 415
 
@@ -108,11 +108,19 @@ def create_product():
 def get_products():
     Productos=Product.query.all()
     return jsonify({"products":[product.serialize()for product in Productos]})
-
+# RETORNA UN PRODUCTO GET
 @api.route("/product/<int:id>", methods=["GET"])
 def get_product(id):
     Productos=Product.query.filter_by(id=id).first()
     return jsonify(Productos.serialize())
+
+# RETORNA LOS PRODUCTOS DE UN USUARIO GET
+@api.route("/user-products", methods=["GET"])
+@jwt_required()
+def get_products_by_user_id():
+    current_user_id = get_jwt_identity()
+    productos=Product.query.filter_by(user_id=current_user_id).all()
+    return jsonify({"products":[product.serialize() for product in productos]})
 
 #CREA UNA TRANSACCION
 @api.route("/transaccion", methods=["POST"])
