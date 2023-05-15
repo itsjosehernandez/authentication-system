@@ -14,6 +14,8 @@ import { ProductForm } from "./pages/productForm.jsx";
 import { Register } from "./pages/register";
 import { ProductDetails } from "./pages/ProductDetails.jsx";
 import { ProductSearch } from "./pages/ProductSearch.jsx";
+import { Prueba} from "./pages/prueba.jsx";
+
 
 
 //create your first component
@@ -41,6 +43,7 @@ const Layout = () => {
                         <Route element={<Register/>} path="/register"/>
                         <Route element={<ProductDetails/>} path="/productdetails/:id"/>
                         <Route element={<ProductSearch/>} path="/productsearch"/>
+                        <Route element={<Prueba/>} path="/prueba"/>
 
 
                     </Routes>
