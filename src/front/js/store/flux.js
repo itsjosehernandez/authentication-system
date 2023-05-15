@@ -99,10 +99,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(data),
 					headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`  }
 				})
-				if (!response.ok) return alert("hubo un error con la creacion del producto")
+				if (!response.ok) return toast.error("hubo un error con la creacion del producto")
 				getActions().getUserProducts()
 				getActions().getProducts()
-				console.log("Producto creado con exito")
+				toast.success("Producto creado con exito")
 			},
 
 			getUserProducts: async () => {

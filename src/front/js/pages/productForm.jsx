@@ -22,16 +22,6 @@ export const ProductForm = () => {
     actions.handleCreateProduct(productInfo);
 }
 
-  toast("Producto Creado", {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-  });
   return (
     <div className="container">
       <div className="card m-5">

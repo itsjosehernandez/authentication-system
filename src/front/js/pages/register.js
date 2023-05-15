@@ -45,7 +45,7 @@ export const Register = () => {
     
     return (<>
 
-        <ToastContainer />
+        
         <div className="container py-5">
 
 
