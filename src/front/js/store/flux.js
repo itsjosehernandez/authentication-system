@@ -94,15 +94,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//CREAR PRODUCTO
 			handleCreateProduct: async (data) => {
 				let token = localStorage.getItem("token")
+				console.log (data)
+				const formData = new FormData ()
+				formData.append("name",data.name)
+				formData.append("price",data.price)
+				formData.append("status",data.status)
+				formData.append("product_img",data.product_img[0])
 				const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
 					method: "POST",
-					body: JSON.stringify(data),
-					headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`  }
+					body: formData,
+					headers: {"Authorization": `Bearer ${token}`}
 				})
-				if (!response.ok) return alert("hubo un error con la creacion del producto")
+				if (!response.ok) return toast.error("hubo un error con la creacion del producto")
 				getActions().getUserProducts()
 				getActions().getProducts()
-				console.log("Producto creado con exito")
+				toast.success("Producto creado con exito")
 			},
 
 			getUserProducts: async () => {
@@ -133,7 +139,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: { "Content-Type": "application/json", authorization: `Bearer ${getStore().token}` }
 				})
 				if (!response.ok) return alert("hubo un error con la transaccion")
-				toast("Producto creada con exito")
+				toast("Transaccion creada con exito")
 			},
 			getTransacciones: async () =>{
 				const response = await fetch(`${process.env.BACKEND_URL}/api/transaccion`, {

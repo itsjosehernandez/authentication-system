@@ -37,9 +37,9 @@ export const Navbar = () => {
                             <Link to={"/pages/home"} className="nav-link text-light" href="#">Tienda</Link>
                         </li>
 
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <a className="nav-link text-light" href="#">User</a>
-                        </li>
+                        </li> */}
 
 
                     </ul>
@@ -68,9 +68,9 @@ export const Navbar = () => {
 
 
 
-                            <li className="nav-item ">
+                            {/* <li className="nav-item ">
                                 <a className="nav-link active" aria-current="page" >   </a>
-                            </li>
+                            </li> */}
 
                         </ul>
 

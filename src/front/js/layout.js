@@ -14,7 +14,7 @@ import { ProductForm } from "./pages/productForm.jsx";
 import { Register } from "./pages/register";
 import { ProductDetails } from "./pages/ProductDetails.jsx";
 import { ProductSearch } from "./pages/ProductSearch.jsx";
-
+import { ToastContainer } from "react-toastify";
 
 //create your first component
 const Layout = () => {
@@ -28,6 +28,7 @@ const Layout = () => {
 
     return (
         <div>
+            <ToastContainer />
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />

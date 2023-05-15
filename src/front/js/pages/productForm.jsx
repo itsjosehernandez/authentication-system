@@ -9,7 +9,7 @@ export const ProductForm = () => {
   const [productInfo, setProductInfo] = useState({
     name: "",
     price: 0,
-    product_img: "https://i.imgur.com/v6zm8qS.png",
+    product_img: [],
     status: "",
   });
 
@@ -17,21 +17,17 @@ export const ProductForm = () => {
     setProductInfo({ ...productInfo, [event.target.name]: event.target.value });
   };
 
+  const handleImg = (event) => {
+    const files = event.target.files 
+    setProductInfo({ ...productInfo, product_img:files })
+    console.log (files)
+  }
+
   function createproduct(event) {
     event.preventDefault();
     actions.handleCreateProduct(productInfo);
 }
 
-  toast("Producto Creado", {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-  });
   return (
     <div className="container">
       <div className="card m-5">
@@ -92,16 +88,15 @@ export const ProductForm = () => {
             <label htmlFor="formFileMultiple" className="form-label">
               Agregar una foto del articulo
             </label>
-            {/* <input
+            <input
               className="form-control"
               name="product_img"
-              value={productInfo.product_img}
               onChange={(event) => {
-                handleChange(event);
+                handleImg(event);
               }}
               type="file"
-              multiple
-            /> */}
+            
+            />
           </div>
           <button
             type="button"
