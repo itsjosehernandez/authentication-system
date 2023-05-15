@@ -4,7 +4,7 @@ import "../../styles/galeriaproductos.css";
 import "../../styles/productDetails.css";
 import onizuka from "../../img/onizuka.jpg";
 import logo from "../../img/OP2.png";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 
 export const ProductDetails = () => {
   const { store, actions } = useContext(Context);
@@ -24,6 +24,8 @@ export const ProductDetails = () => {
       console.error(error);
     }
   };
+
+
   useEffect(() => {
     // const product = store.products.find(product =>product.id==id)
     // SetProductDetail(product)
@@ -36,7 +38,7 @@ export const ProductDetails = () => {
     <div className="container text-center py-5 ">
       <div className="row ">
         <div className="col">
-          <div className="product d-flex align-items-start ">
+          <div className="product d-flex justify-content-end ">
             <div className="product-small-img">
               <img src={logo} onClick={imgDisplay}></img>
               <img src={logo} onClick={imgDisplay}></img>
@@ -45,7 +47,7 @@ export const ProductDetails = () => {
               <img src={logo} onClick={imgDisplay}></img>
             </div>
             <div className="img-container col-sd-1 col-md-6 col-lg p-2 float-end ">
-              <img id="imageBox" src={productDetail.product_img}></img>
+              <img id="imageBox" className="size"src={productDetail.product_img}></img>
             </div>
           </div>
         </div>
@@ -87,7 +89,9 @@ export const ProductDetails = () => {
             </div> */}
 
             <div className="flex-column">
-              <div className="p-2 rectangulo">Comprar Ahora!</div>
+
+            <button variant="primary" onClick={()=>actions.handleTransaccion(product.id, product.status)}>Buy now!</button>
+
             </div>
 
             <div className="card card-personalizada ">

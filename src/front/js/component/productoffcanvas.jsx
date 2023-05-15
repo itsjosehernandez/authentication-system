@@ -29,8 +29,7 @@ function Productsoffcanvas({product}) {
               </Card.Text>
               <Row xs={1} md={1} lg={1} className="g-3">
                 
-                <Link to={`/productDetails/${product.id}`} variant="primary"></Link>
-                <Button variant="primary" onClick={()=>actions.handleTransaccion(product.id, product.status)}>Details</Button>
+                <Link to={`/productDetails/${product.id}`} variant="primary" className="btn btn-primary">Details</Link>
               </Row>
             </Card.Body>
           </Card>
