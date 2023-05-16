@@ -9,7 +9,7 @@ export const Inicio = () => {
     
 	return (
 
-<>
+<div className="d-flex flex-column">
 
 <div className="jumbotron">
 
@@ -46,10 +46,9 @@ export const Inicio = () => {
 
         </div>
 
+
 <div className="mtdescription ">
-
-
-<div><h2 className="text-center">Que es TradeaTodo?</h2></div>  
+<div><h2 className="text-center">Que es TradeaTodo?</h2> </div>
 
 
 <hr></hr>
@@ -76,7 +75,7 @@ export const Inicio = () => {
 </div>
 </div>
     
-    </>
+    </div>
     
 
 
