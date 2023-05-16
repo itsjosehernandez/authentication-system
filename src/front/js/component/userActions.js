@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/offcanvas.css";
-import Product from  "../component/productGrid.jsx"
+import Productsoffcanvas from  "../component/productoffcanvas.jsx"
 
 export const UserActions = () => {
 
@@ -84,7 +84,7 @@ export const UserActions = () => {
 					<div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabIndex="0">					
 					<div ><h6>Mis productos</h6></div>
 					{store.user_products && store.user_products.map((product) => {
-                	return <Product  key={product.id} product={product}></Product>})}
+                	return <Productsoffcanvas key={product.id} product={product}></Productsoffcanvas>})}
 					</div>
 					</div>
 					</div>
