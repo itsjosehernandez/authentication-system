@@ -13,8 +13,8 @@ export const UserActions = () => {
 		actions.getUserProducts()
 	},[])
 	return (
-		<div className="offcanvas offcanvas-end"  tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-			<div className="offcanvas-header">
+		<div className="offcanvas offcanvas-end" data-bs-scroll="true" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+			<div className="offcanvas-header" >
 
 				<h5 className="offcanvas-title text-center" id="offcanvasRightLabel">Perfil</h5>
 				<button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -42,7 +42,7 @@ export const UserActions = () => {
 							<div className="col">
 
 								<li className="nav-item ">
-									<button className="btn btn-success " onClick={() => { navigate("/productform") }} aria-expanded="page">
+									<button className="btn btn-success " data-bs-toggle="offcanvas" onClick={() => { navigate("/productform") }} aria-expanded="page">
 										Vender<i class="fa-solid fa-up"></i>
 									</button>
 								</li>
@@ -50,7 +50,7 @@ export const UserActions = () => {
 							<div className="col">
 								<li className="nav-item">
 
-									<button type="button" className="btn btn-danger  " onClick={() => { actions.handleLogout() ? navigate("/") : "" }} >Logout<i class="fa-solid fa-right-from-bracket"></i></button>
+									<button type="button" className="btn btn-danger" data-bs-toggle="offcanvas" onClick={() => { actions.handleLogout() ? navigate("/") : "" }} >Logout<i class="fa-solid fa-right-from-bracket"></i></button>
 
 								</li>
 							</div>
@@ -82,7 +82,7 @@ export const UserActions = () => {
 
 					</div>
 					<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">					
-					<div><h6>Mis productos</h6></div>
+					<div ><h6>Mis productos</h6></div>
 					{store.user_products && store.user_products.map((product) => {
                 	return <Productsoffcanvas key={product.id} product={product}></Productsoffcanvas>})}
 					</div>

@@ -8,6 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from sqlalchemy.sql.functions import ReturnTypeFromArgs
 import re
+from api.firebase.firebase import Bucket
 
 class unaccent(ReturnTypeFromArgs):
     pass
@@ -80,18 +81,21 @@ def login():
 @api.route("/product", methods=["POST"])
 @jwt_required()
 def create_product():
-    body = request.json
-    name = body.get("name", None)
-    price = body.get ("price", None)
-    product_img = body.get ("product_img", None)
-    status = body.get ("status", None)
+    form = request.form
+    files = request.files 
+    name = form.get("name")
+    price = form.get ("price")
+    product_img = files.get ("product_img")
+    status = form.get ("status")
     is_user_registered = get_jwt_identity()
     user = User.query.get(is_user_registered)
     if user is None:
         return{"error": "no hemos encontrado su User_id"}
     if name is None or price is None or product_img is None or status is None:
         return{"error": "todos los datos requeridos"}, 460
-    new_product = Product(name=name, price=price, product_img=product_img, status=status, user_id=user.id)
+    
+    url_product_img = Bucket.upload_file(product_img, product_img.filename)
+    new_product = Product(name=name, price=price, product_img=url_product_img, status=status, user_id=user.id)
     print(new_product)
     db.session.add(new_product)
     try:
