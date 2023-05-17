@@ -4,7 +4,7 @@ import "../../styles/galeriaproductos.css";
 import "../../styles/productDetails.css";
 import onizuka from "../../img/onizuka.jpg";
 import logo from "../../img/OP2.png";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export const ProductDetails = () => {
   const { store, actions } = useContext(Context);
@@ -17,14 +17,15 @@ export const ProductDetails = () => {
   // filtro store por mis products buscando un id igual a el de los parametros lo va a guardar en product
   const getProduct = async () => {
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/api/product/${id}`); //<-- ruta dinamica creada//
+      const response = await fetch(
+        `${process.env.BACKEND_URL}/api/product/${id}`
+      ); //<-- ruta dinamica creada//
       const data = await response.json();
       SetProductDetail(data);
     } catch (error) {
       console.error(error);
     }
   };
-
 
   useEffect(() => {
     // const product = store.products.find(product =>product.id==id)
@@ -38,18 +39,11 @@ export const ProductDetails = () => {
     <div className="container text-center py-5 ">
       <div className="row ">
         <div className="col">
-          <div className="product d-flex justify-content-end ">
-            <div className="product-small-img">
-              <img src={logo} onClick={imgDisplay}></img>
-              <img src={logo} onClick={imgDisplay}></img>
-              <img src={logo} onClick={imgDisplay}></img>
-              <img src={logo} onClick={imgDisplay}></img>
-              <img src={logo} onClick={imgDisplay}></img>
-            </div>
-            <div className="img-container col-sd-1 col-md-6 col-lg p-2 float-end ">
-              <img id="imageBox" className="size"src={productDetail.product_img}></img>
-            </div>
-          </div>
+          <img
+            id="imageBox"
+            className="w-100 h-100"
+            src={productDetail.product_img}
+          ></img>
         </div>
 
         <div className="col flex-column  mb-3 ">
@@ -59,11 +53,11 @@ export const ProductDetails = () => {
             </div>
 
             <div className="p-2 float-start">
-              <i className="fa-regular fa-star iconstar"></i>
-              <i className="fa-regular fa-star iconstar"></i>
-              <i className="fa-regular fa-star iconstar"></i>
-              <i className="fa-regular fa-star iconstar"></i>
-              <i className="fa-regular fa-star iconstar"></i>
+              <i class="fas fa-star iconstar"></i>
+              <i class="fas fa-star iconstar"></i>
+              <i class="fas fa-star iconstar"></i>
+              <i class="fas fa-star iconstar"></i>
+              <i class="fas fa-star iconstar"></i>
             </div>
 
             <div className="p-2">
@@ -89,12 +83,17 @@ export const ProductDetails = () => {
             </div> */}
 
             <div className="flex-column">
-
-            <button variant="primary" onClick={()=>actions.handleTransaccion(product.id, product.status)}>Buy now!</button>
-
+              <button className="btn btn-success mb-4"
+                variant="primary"
+                onClick={() =>
+                  actions.handleTransaccion(product.id, product.status)
+                }
+              >
+                Buy now!
+              </button>
             </div>
 
-            <div className="card card-personalizada ">
+            <div className="card ">
               <div className="card-body ">
                 <div className="container text-center ">
                   <div className="row row-cols-2">

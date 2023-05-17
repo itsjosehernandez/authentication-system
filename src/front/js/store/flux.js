@@ -132,6 +132,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			handleTransaccion: async (product_id, transaccion_status) => {
+				const actions = getActions()
 				console.log(product_id, transaccion_status)
 				const response = await fetch(`${process.env.BACKEND_URL}/api/transaccion`, {
 					method: "POST",
@@ -140,6 +141,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				if (!response.ok) return alert("hubo un error con la transaccion")
 				toast("Transaccion creada con exito")
+				actions.getTransacciones()
 			},
 			getTransacciones: async () => {
 				const response = await fetch(`${process.env.BACKEND_URL}/api/transaccion`, {

@@ -6,7 +6,7 @@ import React, {useContext} from "react";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-
+import "../../styles/productCard.css"
 
 
 
@@ -17,7 +17,7 @@ function Product({product}) {
     // <Row xs={1} md={3} lg={5} className="g-4 px-5">
       
         <Col lg={3} md={3} xs={12}  key={product.id}>
-          <Card className= "my-3">
+          <Card className= "my-3 cardgrid">
             <Card.Img variant="top" src={product.product_img} />
             <Card.Body>
               <Card.Title>{product.name}</Card.Title>

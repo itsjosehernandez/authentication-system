@@ -71,7 +71,8 @@ class Transaccion(db.Model):
         return {
             "product_id": self.product_id,
             "user_id": self.user_id,
-            "transaccion_status": self.transaccion_status
+            "transaccion_status": self.transaccion_status,
+            "product":self.product.serialize()
             # do not serialize the password, its a security breach
         }
 

@@ -75,7 +75,10 @@ export const UserActions = () => {
 					{store.transacciones.map((transaccion)=>{
 					return (
 						<div key={transaccion.id}>
-							{transaccion.transaccion_status}
+							<div className="">{transaccion.product.name}</div>
+							
+							<div className="">{transaccion.transaccion_status}</div>
+
 						</div>
 					)
 				})}
