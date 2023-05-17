@@ -53,11 +53,11 @@ export const ProductDetails = () => {
             </div>
 
             <div className="p-2 float-start">
-              <i class="fas fa-star iconstar"></i>
-              <i class="fas fa-star iconstar"></i>
-              <i class="fas fa-star iconstar"></i>
-              <i class="fas fa-star iconstar"></i>
-              <i class="fas fa-star iconstar"></i>
+              <i className="fas fa-star iconstar"></i>
+              <i className="fas fa-star iconstar"></i>
+              <i className="fas fa-star iconstar"></i>
+              <i className="fas fa-star iconstar"></i>
+              <i className="fas fa-star iconstar"></i>
             </div>
 
             <div className="p-2">
@@ -86,14 +86,14 @@ export const ProductDetails = () => {
               <button className="btn btn-success mb-4"
                 variant="primary"
                 onClick={() =>
-                  actions.handleTransaccion(product.id, product.status)
+                  actions.handleTransaccion(productDetail.id, productDetail.status)
                 }
               >
                 Buy now!
               </button>
             </div>
 
-            <div className="card ">
+            <div className="cNameard ">
               <div className="card-body ">
                 <div className="container text-center ">
                   <div className="row row-cols-2">

@@ -5,7 +5,7 @@ import Product from  "../component/productGrid.jsx"
 
 export const Home = () => {
     const { store, actions } = useContext(Context);
-    console.log(store.token)
+
     
 
     return (

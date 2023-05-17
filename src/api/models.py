@@ -14,8 +14,12 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), unique=False, nullable=False)
-    pay = db.Column (db.String(150), unique=True,nullable=False)
-    
+    pay = db.Column(db.String(150), unique=True, nullable=False)
+    products = db.relationship(
+        'Product', backref='user', cascade='all, delete')
+    transacciones = db.relationship(
+        'Transaccion', backref='user', cascade='all, delete')
+
     def __repr__(self):
         return f'<User {self.email}>'
 
@@ -35,9 +39,9 @@ class Product(db.Model):
     price = db.Column(db.Integer, unique=False, nullable=False)
     product_img = db.Column(db.String(200), unique=False, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    user = db.relationship(User)
     status = db.Column(db.String(200), unique=False, nullable=False)
-
+    transacciones = db.relationship(
+        'Transaccion', backref='product', cascade='all, delete')
     # create a funcition  to return a string when we add something
 
     def __repr__(self):
@@ -58,10 +62,9 @@ class Product(db.Model):
 class Transaccion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey("product.id"))
-    product = db.relationship(Product)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    user = db.relationship(User)
-    transaccion_status = db.Column(db.String(200), unique=False, nullable=False)
+    transaccion_status = db.Column(
+        db.String(200), unique=False, nullable=False)
 
     # create a funcition  to return a string when we add something
     def __repr__(self):
@@ -75,4 +78,3 @@ class Transaccion(db.Model):
             "product":self.product.serialize()
             # do not serialize the password, its a security breach
         }
-
