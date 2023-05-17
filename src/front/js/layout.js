@@ -16,6 +16,8 @@ import { ProductDetails } from "./pages/ProductDetails.jsx";
 import { ProductSearch } from "./pages/ProductSearch.jsx";
 import { Prueba} from "./pages/prueba.jsx";
 import { ToastContainer } from "react-toastify";
+import { About } from "./pages/about.jsx";
+
 
 
 //create your first component
@@ -45,6 +47,8 @@ const Layout = () => {
                         <Route element={<ProductDetails/>} path="/productdetails/:id"/>
                         <Route element={<ProductSearch/>} path="/productsearch"/>
                         <Route element={<Prueba/>} path="/prueba"/>
+                        <Route element={<About/>} path="/about"/>
+
 
 
                     </Routes>
