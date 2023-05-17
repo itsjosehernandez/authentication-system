@@ -1,0 +1,11 @@
+.userimagen{
+    height: 120px;
+    width: 120px;
+
+}
+hr {
+    background-color: rgb(116, 114, 114);
+    height: 10px;
+    margin-left: 38%;
+    width: 25%;
+  }

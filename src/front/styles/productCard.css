@@ -1,0 +1,13 @@
+.productCard {
+    height:400px;
+    position: relative
+
+}
+
+.cardgrid{
+    transition: all 0.3s;
+}
+
+.cardgrid:hover {
+    transform: scale(1.10);
+}

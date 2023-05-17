@@ -39,8 +39,9 @@ opacity: 1;
 }
 
 .img-container{
-     float: right; 
-    padding: 10px;
+    height:500px;
+    width: 200px;
+
 
 }
 
