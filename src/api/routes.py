@@ -75,7 +75,8 @@ def login():
         token = create_access_token(identity=is_user_registered.id)
         print(token)
         return jsonify(
-            {"access_token": token, "email": email, "user_id": is_user_registered.id}
+            {"access_token": token, "email": email,
+                "user_id": is_user_registered.id}
         )
     else:
         return {"msg": "Contraseña incorreta"}, 415
@@ -182,7 +183,8 @@ def get_transaccion():
     transacciones = Transaccion.query.filter_by(user_id=user.id).all()
 
     return jsonify(
-        {"transacciones": [transaccion.serialize() for transaccion in transacciones]}
+        {"transacciones": [transaccion.serialize()
+                           for transaccion in transacciones]}
     )
 
 
@@ -203,10 +205,11 @@ def handle_filter_services():
     if products is not None:
         return jsonify(response), 200
 
+
 @api.route("/delete/<int:id>", methods=["DELETE"])
 @jwt_required()
 def delete_product(id):
-    product =  Product.query.filter_by(id=id).first()
+    product = Product.query.get_or_404(id)
     db.session.delete(product)
     db.session.commit()
-
+    return jsonify({'message': 'Product deleted successfully'})
