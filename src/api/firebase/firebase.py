@@ -2,7 +2,7 @@ from firebase_admin import credentials, initialize_app, firestore, storage
 from api.firebase.firebase_setting import FIREBASE_CONFIG, FIREBASE_STORAGE_BUCKET
 
 
-cred = credentials.Certificate("/etc/secrets/firebase.json")
+cred = credentials.Certificate(FIREBASE_CONFIG)
 default_app = initialize_app(
     credential=cred,
     options={
