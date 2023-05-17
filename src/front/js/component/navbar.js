@@ -53,10 +53,10 @@ export const Navbar = () => {
 
 
 
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
 
-                            <li className="nav-item">
-                                <a className="nav-link text-light" href="#">About Us</a>
+                            <li className="nav-item ">
+                            <Link to={"/about"} className="nav-link text-light " href="#">About </Link>
                             </li>
 
 
