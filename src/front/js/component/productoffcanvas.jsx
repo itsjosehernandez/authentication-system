@@ -10,6 +10,8 @@ import { Context } from "../store/appContext";
 
 
 
+
+
 function Productsoffcanvas({product}) {
   const {store,actions}= useContext(Context)
   return (
@@ -30,6 +32,7 @@ function Productsoffcanvas({product}) {
               <Row xs={1} md={1} lg={1} className="g-3">
                 
                 <Link to={`/productDetails/${product.id}`} variant="primary" className="btn btn-primary">Details</Link>
+                <Button onClick={()=>{actions.deleteProduct(product.id)}}> Delete product</Button>
               </Row>
             </Card.Body>
           </Card>

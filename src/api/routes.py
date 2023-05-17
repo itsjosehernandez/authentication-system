@@ -202,3 +202,11 @@ def handle_filter_services():
         return jsonify({"message": "not found"}), 404
     if products is not None:
         return jsonify(response), 200
+
+@api.route("/delete/<int:id>", methods=["DELETE"])
+@jwt_required()
+def delete_product(id):
+    product =  Product.query.filter_by(id=id).first()
+    db.session.delete(product)
+    db.session.commit()
+

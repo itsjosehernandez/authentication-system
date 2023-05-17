@@ -40,7 +40,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const data = await response.json();
 				const store = getStore();
-				setStore({ ...store, token: data.access_token, user:data.email });
+				setStore({ ...store, token: data.access_token, user: data.email });
 				JSON.stringify(localStorage.setItem("token", data.access_token));
 				JSON.stringify(localStorage.setItem("email", data.email));
 				return true;
@@ -94,16 +94,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//CREAR PRODUCTO
 			handleCreateProduct: async (data) => {
 				let token = localStorage.getItem("token")
-				console.log (data)
-				const formData = new FormData ()
-				formData.append("name",data.name)
-				formData.append("price",data.price)
-				formData.append("status",data.status)
-				formData.append("product_img",data.product_img[0])
+				console.log(data)
+				const formData = new FormData()
+				formData.append("name", data.name)
+				formData.append("price", data.price)
+				formData.append("status", data.status)
+				formData.append("product_img", data.product_img[0])
 				const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
 					method: "POST",
 					body: formData,
-					headers: {"Authorization": `Bearer ${token}`}
+					headers: { "Authorization": `Bearer ${token}` }
 				})
 				if (!response.ok) return toast.error("hubo un error con la creacion del producto")
 				getActions().getUserProducts()
@@ -115,11 +115,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let token = localStorage.getItem("token")
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/api/user-products`, {
-						headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`  }
+						headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }
 					});
 					if (response.ok) {
 						const body = await response.json()
-						setStore({ user_products : body.products })
+						setStore({ user_products: body.products })
 						return true
 					} else if (response.status == 404) {
 						console.log("Usuario no tiene productos")
@@ -141,17 +141,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (!response.ok) return alert("hubo un error con la transaccion")
 				toast("Transaccion creada con exito")
 			},
-			getTransacciones: async () =>{
+			getTransacciones: async () => {
 				const response = await fetch(`${process.env.BACKEND_URL}/api/transaccion`, {
 					method: "GET",
 					headers: { "Content-Type": "application/json", authorization: `Bearer ${getStore().token}` }
-				}) 
+				})
 				if (!response.ok) return alert("hubo un error con la transaccion")
-				const data = await response.json ()
+				const data = await response.json()
 				const store = getStore()
-				setStore({...store, transacciones:data.transacciones})
-		}
-	},
+				setStore({ ...store, transacciones: data.transacciones })
+			},
+			deleteProduct: async (id) => {
+
+				const response = await fetch(`${process.env.BACKEND_URL}/api/delete/${id}`, {
+					method: "DELETE",
+					headers: { authorization: `Bearer ${getStore().token}` }
+				})
+				if (response.ok) {
+					toast.success("producto borrado exitosamente")
+
+
+				} else {
+					toast.error("ha ocurrido un error")
+				}
+
+			}
+		},
 	}
 }
 
