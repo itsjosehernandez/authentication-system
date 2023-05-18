@@ -1,6 +1,6 @@
 
 import React from "react";
-
+import diegoPP from "../../img/diego_pp.jpg"
 
 
 export const About= () => {
@@ -23,7 +23,7 @@ export const About= () => {
           <div className="row d-flex justify-content-center  ">
             <div className="col col-12 col-lg-3">
               <div className="card " >
-                <img src="https://placehold.co/600x400" className="card-img-top" alt="..."/>
+                <img src="" className="card-img-top" alt="..."/>
                 <div class="card-body">
                     <h5 class="card-title">Nombre</h5>
                     <p class="card-text">Datos personales</p>
@@ -43,10 +43,11 @@ export const About= () => {
               </div>
               <div className="col col-12 col-lg-3">
             <div className="card " >
-                <img src="https://placehold.co/600x400" className="card-img-top" alt="..."/>
+                <img src={diegoPP} className="card-img-top" alt="..."/>
                 <div class="card-body">
-                    <h5 class="card-title">Nombre</h5>
-                    <p class="card-text">Datos personales</p>
+                    <h5 class="card-title">Diego Arraez</h5>
+                    <p class="card-text">27 años, Fullstack developer,Me apasionan los videojuegos, los animales,pasar tiempo con mi familia (preferiblemente en la playa)
+                    y mas que nada me encanta aprender a crear cosas desde 0 usando la programacion y el diseño web.</p>
                 </div>
 
               </div>
