@@ -72,7 +72,7 @@ export const UserActions = () => {
 					<div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabIndex="0">
 
 					<div><h6>Notificaciones</h6></div>
-					{store.transacciones.map((transaccion)=>{
+					{store.transacciones?.map((transaccion)=>{
 					return (
 						<div key={transaccion.id}>
 							<div className="">{transaccion.product.name}</div>
