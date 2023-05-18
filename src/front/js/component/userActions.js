@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/offcanvas.css";
 import Productsoffcanvas from  "../component/productoffcanvas.jsx"
+import { ToastContainer, toast } from 'react-toastify';
 
 export const UserActions = () => {
 
@@ -13,7 +14,7 @@ export const UserActions = () => {
 		actions.getUserProducts()
 	},[])
 	return (
-		<div className="offcanvas offcanvas-end" data-bs-scroll="true" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+		<div className="offcanvas offcanvas-end"  data-bs-backdrop="static" data-bs-scroll="true" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 			<div className="offcanvas-header" >
 
 				<h5 className="offcanvas-title text-center" id="offcanvasRightLabel">Perfil</h5>
@@ -74,12 +75,17 @@ export const UserActions = () => {
 					<div><h6>Notificaciones</h6></div>
 					{store.transacciones?.map((transaccion)=>{
 					return (
-						<div key={transaccion.id}>
-							<div className="">{transaccion.product.name}</div>
-							
-							<div className="">{transaccion.transaccion_status}</div>
-
+						<div className="card mb-3" key={transaccion.id}>
+						<div className="card-body bg-dark-subtle m-1">
+						<h6 className="card-title mb-3 text-primary">Tienes una Notificacion Nueva</h6>
+						<p className="card-text">{transaccion.product.name}</p>
+						<div className="card-text d-flex justify-content-between">
+							<p>{transaccion.transaccion_status}</p> 
+							<p>{transaccion.product.price}$</p>
+							</div>
 						</div>
+						</div>
+						
 					)
 				})}
 
@@ -87,7 +93,7 @@ export const UserActions = () => {
 					<div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabIndex="0">					
 					<div ><h6>Mis productos</h6></div>
 					{store.user_products && store.user_products.map((product) => {
-                	return <Productsoffcanvas key={product.id} product={product}></Productsoffcanvas>})}
+    				return <Productsoffcanvas key={product.id} product={product}></Productsoffcanvas>})}
 					</div>
 					</div>
 					</div>
