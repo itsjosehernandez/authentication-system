@@ -1,5 +1,8 @@
 import React from "react";
 import "../../styles/home.css";
+import nintendo from"../../img/nintendo-logo.png"
+import pc from"../../img/pc.png"
+
 
 
 
@@ -18,25 +21,25 @@ export const Inicio = () => {
           <div className="row mt">
             <div className="col col-12 col-lg-3">
               <div className="card " >
-                <img src="https://as01.epimg.net/meristation/imagenes/2021/07/15/noticias/1626364677_049220_1626364866_noticia_normal.jpg" className="card-img-top" alt="..."/>
+                <img src="https://as01.epimg.net/meristation/imagenes/2021/07/15/noticias/1626364677_049220_1626364866_noticia_normal.jpg" className=" img-cards card-img-top " alt="..."/>
 
               </div>
             </div>     
             <div className="col col-12 col-lg-3">
             <div className="card " >
-                <img src="https://as01.epimg.net/meristation/imagenes/2021/07/15/noticias/1626364677_049220_1626364866_noticia_normal.jpg" className="card-img-top" alt="..."/>
+                <img src="https://assets.xboxservices.com/assets/4a/1a/4a1a5edf-de58-4313-80f2-fec439936ecb.jpg?n=Power-On_Content-Placement-0_1_788x444.jpg" className="  img-cards card-img-top" alt="..."/>
 
               </div>
               </div>
               <div className="col col-12 col-lg-3">
             <div className="card " >
-                <img src="https://as01.epimg.net/meristation/imagenes/2021/07/15/noticias/1626364677_049220_1626364866_noticia_normal.jpg" className="card-img-top" alt="..."/>
+                <img src= {nintendo}  className="card-img-top  img-cards " alt="..."/>
 
               </div>
               </div>  
               <div className="col col-12 col-lg-3">
             <div className="card " >
-                <img src="https://as01.epimg.net/meristation/imagenes/2021/07/15/noticias/1626364677_049220_1626364866_noticia_normal.jpg" className="card-img-top" alt="..."/>
+                <img src={pc} className="card-img-top img-cards " alt="..."/>
 
               </div>
               </div>   
