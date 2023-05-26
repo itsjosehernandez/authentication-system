@@ -3,20 +3,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
-import { Inicio } from "./pages/paginainicio.jsx";
-import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { Home } from "./pages/home";
-import { ProductForm } from "./pages/productForm.jsx";
 import { Register } from "./pages/register";
-import { ProductDetails } from "./pages/ProductDetails.jsx";
-import { ProductSearch } from "./pages/ProductSearch.jsx";
-import { Prueba} from "./pages/prueba.jsx";
 import { ToastContainer } from "react-toastify";
-import { About } from "./pages/about.jsx";
 
 
 
@@ -37,17 +29,12 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-                        <Route element={<Inicio />} path="/" />
-                        <Route element={<ProductForm/>} path="/productform" />
-                        <Route element={<Demo />} path="/demo" />
+                        <Route element={<Register/>} path="/" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
-                        <Route element={<Home/>} path="/pages/home"/>
-                        <Route element={<Register/>} path="/register"/>
-                        <Route element={<ProductDetails/>} path="/productdetails/:id"/>
-                        <Route element={<ProductSearch/>} path="/productsearch"/>
-                        <Route element={<Prueba/>} path="/prueba"/>
-                        <Route element={<About/>} path="/about"/>
+
+
+
 
 
 

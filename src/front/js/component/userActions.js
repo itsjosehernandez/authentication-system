@@ -11,7 +11,7 @@ export const UserActions = () => {
 	const navigate = useNavigate()
 	useEffect(() => {
 		console.log ("por favor")
-		actions.getUserProducts()
+		// actions.getUserProducts()
 	},[])
 	return (
 		<div className="offcanvas offcanvas-end"  data-bs-backdrop="static" data-bs-scroll="true" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">

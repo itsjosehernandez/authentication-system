@@ -61,7 +61,7 @@ export const Navbar = () => {
 
 
                             {!accessToken && <li className="nav-item">
-                                <Link to={"/register"} className="nav-link text-light" href="#">Login <i className="fa-regular fa-user"></i></Link>
+                                <Link to={"/"} className="nav-link text-light" href="#">Login <i className="fa-regular fa-user"></i></Link>
                             </li>}
 
 

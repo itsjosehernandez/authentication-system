@@ -8,7 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from sqlalchemy.sql.functions import ReturnTypeFromArgs
 import re
-from api.firebase.firebase import Bucket
+# from api.firebase.firebase import Bucket
 
 
 class unaccent(ReturnTypeFromArgs):
@@ -52,7 +52,7 @@ def registro():
         return {"msg": "usuario creado con exito"}
     except Exception as error:
         db.session.rollback()
-        return jsonify({"error": error}), 450
+        return jsonify({"error": error.args[0]}), 450
 
 
 # login de Usuario
